@@ -18,3 +18,13 @@ formAddTodo.addEventListener('submit', event => {
     target.reset()
 })
 
+todosContainer.addEventListener('click', event => {
+    const { target } = event
+    const classList = Array.from(target.classList)
+    const isIncludesDelete = classList.includes('delete')
+    const li = target.parentElement
+
+    if (!isIncludesDelete) return
+
+    li.remove()
+})
