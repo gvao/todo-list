@@ -1,6 +1,38 @@
+/* basics */
 @import url("./reset.css");
 @import url("./variables.css");
 
+/* components */
+@import url("./inputs.css");
+@import url("./buttons.css");
+@import url("./header.css");
+
+/* patterns */
+@import url("./todos.css");
+
+
 body {
-    background-color: var(--color-white-dark);
+    font-family: sans-serif, Helvetica, Arial;
+
+    background-color: var(--color-primary);
+    color: var(--bg-primary);
+
+    width: 100%;
+    max-width: var(--max-width);
+    min-width: var(--min-width);
+
+    margin: var(--margin-center);
+    padding: var(--pd-default);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--pd-medium);
 }
+
+#search-area {
+    display: flex;
+    align-items: center;
+    gap: var(--pd-medium);
+}
+

@@ -1,40 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My todo list</title>
 
-    <link rel="stylesheet" href="assets/css/index.css" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+
+
+    <link rel="stylesheet" href="assets/css/index.css">
+
+    <title>My todo list</title>
 </head>
+
 <body>
     <header>
         <h1>My todo list</h1>
+        <p>Tenha suas atividades listadas e organizadas!</p>
     </header>
 
     <div id="todos">
-        <div id="search-area">
-            <input type="text" name="search" id="search">
-            <button lang="en">New</button>
-        </div>
+        <form id="search-area">
+            <input type="text" name="search" id="search" placeholder="Pesquise ou adicione" autofocus>
+            <button type="submit" lang="en">New</button>
+        </form>
 
         <ul>
             <li class="todo-item">
                 <span class="todo-content">Fazer tal coisa</span>
-                <i></i>
+                <i class="fa fa-trash"></i>
             </li>
             <li class="todo-item">
                 <span class="todo-content">Musculação</span>
+                <i class="fa fa-trash"></i>
             </li>
             <li class="todo-item">
                 <span class="todo-content">Almoçar</span>
+                <i class="fa fa-trash"></i>
             </li>
         </ul>
     </div>
 
-
-
     <script src="assets/js/index.js"></script>
 </body>
+
 </html>
