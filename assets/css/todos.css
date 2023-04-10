@@ -13,14 +13,15 @@
     gap: var(--pd-medium);
 }
 
-#todos > ul > li {
-    /* border: 2px solid; */
-
+#todos > ul li {
     background-color: var(--color-secondary);
     border-radius: var(--radius-default);
     padding: var(--pd-medium) var(--pd-default);
+}
 
+.todo-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+

@@ -30,9 +30,12 @@ body {
     gap: var(--pd-medium);
 }
 
-#search-area {
+#form-search {
     display: flex;
     align-items: center;
     gap: var(--pd-medium);
 }
 
+.hidden {
+    display: none;
+}
