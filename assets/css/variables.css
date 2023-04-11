@@ -1,0 +1,33 @@
+:root {
+
+    /* Colors */
+    --color-primary: #355070;
+    --color-secondary: #6D597A;
+    --color-thirth: #B56576;
+    --color-fourth: #E56B6F;
+    --color-five: #EAAC8B;
+
+    /* Backgrounds */
+
+    --bg-primary: var(--color-five);
+    --bg-secondary: var(--color-fourth);
+
+    /* padding */
+
+    --pd-default: 16px;
+    --pd-medium: calc(var(--pd-default) / 2);
+
+    /* radius */
+
+    --radius-default: 6px;
+
+    /* box-shadown */
+
+    --shadow-default: 3px 4px 4px -1px rgba(0, 0, 0, .2);
+
+    /* width and height */
+
+    --max-width: 690px;
+    --min-width: 400px;
+    --margin-center: 0 auto;
+}
