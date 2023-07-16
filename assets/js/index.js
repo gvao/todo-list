@@ -2,6 +2,7 @@ const todoList = document.querySelector('#todo-list');
 const form = document.querySelector('#form-search');
 const inputSearch = form.search;
 
+
 const todos = [
     { id: newId(), title: 'Fazer isso', isDone: false },
     { id: newId(), title: 'Fazer aquilo', isDone: true },
@@ -22,43 +23,25 @@ function newId(idLength = 26) {
     return id;
 }
 
-const insertNewItemInTodo = (title, idInitial) => {
-    const id = idInitial || newId();
+const createElement = (tagName = '', classNames = []) => {
+    const element = document.createElement(tagName)
+    classNames.forEach(className => element.classList.add(className))
 
-    if (!title) return alert(`Inserir um valor válido`);
+    return element
+}
 
-    const li = document.createElement('li');
-    li.classList.add('todo-item');
-    li.dataset.item = id;
+const addTodoItem = (title = '') => {
+    if (!title) return alert('inserir um valor válido');
 
-    const span = document.createElement('span');
-    span.classList.add('todo-content');
-    span.textContent = title;
+    const newItem = {
+        id: newId(),
+        title,
+        isDone: false
+    }
 
-    const trashIcon = document.createElement('i');
-    trashIcon.classList.add('fa', 'fa-trash');
-    trashIcon.dataset.trash = id;
-
-    li.appendChild(span);
-    li.appendChild(trashIcon);
-
-    todoList.appendChild(li);
-};
-
-const showItemIfMatchValue = value => {
-    const childrens = Array.from(todoList.children);
-
-    childrens.forEach(item => {
-        const textInLowerCase = item.textContent.toLowerCase();
-        const isMatch = textInLowerCase.includes(value.toLowerCase());
-
-        if (!isMatch) {
-            item.classList.add('hidden');
-        } else {
-            item.classList.remove('hidden');
-        }
-    });
-};
+    todos.push(newItem)
+    renderTodos(todos)
+}
 
 const removeItem = event => {
     const { target } = event;
@@ -70,26 +53,52 @@ const removeItem = event => {
     item.remove();
 };
 
+const filterTodoList = searchValue => {
+    const valueLowerCase = searchValue.toLowerCase()
+
+    const filteredItems = todos.filter(({ title }) => title.toLowerCase().includes(valueLowerCase))
+
+    renderTodos(filteredItems)
+};
+
 const handleSubmit = event => {
     event.preventDefault();
     const title = inputSearch.value.trim();
 
-    insertNewItemInTodo(title);
-
+    addTodoItem(title);
     form.reset();
-    showItemIfMatchValue("");
 };
 
-const handleInput = event => {
+function handleInput(event) {
     const inputValue = event.target.value;
 
-    showItemIfMatchValue(inputValue);
+    filterTodoList(inputValue);
 };
 
-const insertInitialTodos = todos.forEach(({ title, id }) => {
-    insertNewItemInTodo(title, id);
-});
+function renderTodos(todos = []) {
+    todoList.innerHTML = ''
 
-inputSearch.addEventListener('input', handleInput);
+    todos
+        .forEach(({ id, title }) => {
+            const li = createElement('li', ['todo-item'])
+            li.dataset.item = id
+
+            const span = createElement('span', ['todo-content'])
+            span.textContent = title
+
+            const trash = createElement('i', ['fa', 'fa-trash'])
+            trash.dataset.trash = id
+
+            li.appendChild(span)
+            li.appendChild(trash)
+
+            todoList.appendChild(li)
+        })
+
+}
+
 form.addEventListener('submit', handleSubmit);
+inputSearch.addEventListener('input', handleInput);
 todoList.addEventListener('click', removeItem);
+
+renderTodos(todos)
