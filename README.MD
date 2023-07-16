@@ -15,7 +15,7 @@ My Todo List é uma aplicação simples de lista de tarefas desenvolvida com HTM
 1. Clone este repositório:
 
 ```shell
-git clone https://github.com/seu-usuario/seu-projeto.git
+git clone https://github.com/gvao/todo-list.git
 ```
 
 2. Abra o arquivo index.html em um navegador web.
