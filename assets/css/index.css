@@ -39,3 +39,10 @@ body {
 .hidden {
     display: none;
 }
+
+.container {
+    max-width: 760px;
+    width: 100%;
+
+    padding: 16px 8px;
+}
