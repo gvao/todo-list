@@ -4,6 +4,7 @@
     gap: var(--pd-default);
 
     min-width: var(--min-width);
+    margin-top: 20px;
 }
 
 #todos > ul {
