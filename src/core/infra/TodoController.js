@@ -1,3 +1,4 @@
+import createElement from "../utils/createdElement.js";
 import Todo from "../domain/Todo.js";
 import Observer from "../domain/observer.js";
 
@@ -106,10 +107,3 @@ export default class TodoController {
 * @property {boolean} status
 * @property {string} input
 */
-
-const createElement = (tagName = '', classNames = [], onClick) => {
-    const element = document.createElement(tagName)
-    classNames.forEach(className => element.classList.add(className))
-    if (onClick) element.addEventListener('click', onClick)
-    return element
-}
