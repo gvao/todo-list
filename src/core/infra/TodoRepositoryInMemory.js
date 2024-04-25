@@ -1,5 +1,6 @@
+import Repository from "../application/Repository.interface.js";
 import Todo from "../domain/Todo.js";
-import Observer from "../domain/observer.js";
+
 
 const todos = [
     Todo.create("Fazer isso"),
@@ -10,16 +11,6 @@ const todos = [
 
 todos[1].done()
 todos[2].done()
-
-class Repository {
-    /**@private */
-    #observer = new Observer()
-
-    /** @param {(data: any) => void} observer */
-    on = (observer) => this.#observer.addObserver(observer)
-
-    emit = (data) => this.#observer.notifyObservers(data)
-}
 
 export default class TodoRepositoryInMemory extends Repository {
     #todos = todos
@@ -37,17 +28,12 @@ export default class TodoRepositoryInMemory extends Repository {
         this.notify()
     }
 
-    getAllTodos() {
+    getAll() {
         return this.#todos;
     }
 
     getById(id) {
         return this.#todos.find(todo => todo.id === id);
-    }
-
-    getByFilter(search) {
-        if (!search) return this.getAllTodos()
-        return this.#todos.filter(({ title }) => title.toLowerCase().includes(search))
     }
 
     deleteById(id) {
