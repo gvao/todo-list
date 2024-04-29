@@ -5,5 +5,3 @@ const createElement = (tagName = '', classNames = [], onClick) => {
     if (onClick) element.addEventListener('click', onClick)
     return element
 }
-
-export default createElement
