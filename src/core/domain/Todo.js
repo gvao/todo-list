@@ -20,6 +20,7 @@ export default class Todo {
     get title() { return this.#title; }
     get id() { return this.#id; }
     get isDone() { return this.#isDone; }
+    get test (){return 'test'}
 
     done() { this.#isDone = true }
     undone() { this.#isDone = false }
@@ -30,6 +31,16 @@ export default class Todo {
     static create(title) {
         const id = newId()
         const isDone = false
-        return new Todo(title, id, isDone)
+
+        const todo = new Todo(title, id, isDone)
+        return todo
+    }
+
+    get dto(){
+        return {
+            title: this.#title,
+            id: this.#id,
+            isDone: this.#isDone
+        }
     }
 }
