@@ -1,0 +1,16 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "![Todo List](/project-apresentation.png)",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch --trace-warnings .",
+    "test": "node --test ./",
+    "test:dev": "reset && node --watch --test ./",
+    "test:debug": "node --inspect --watch --trace-warnings --test ./"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
