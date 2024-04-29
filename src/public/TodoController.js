@@ -1,8 +1,5 @@
-import createElement from "../../public/createdElement.js";
-import Todo from "../domain/Todo.js";
-import Observer from "../domain/observer.js";
 
-export default class TodoController {
+class TodoController {
     form
     inputSearch
 
@@ -20,16 +17,14 @@ export default class TodoController {
                 input: inputValue
             })
         });
-    }
 
-    handleSubmit = callBack => {
         this.form.addEventListener('submit', event => {
             event.preventDefault();
-            const title = this.inputSearch.value.trim();
+            const input = this.inputSearch.value.trim();
+            this.emit({ type: 'submit', input })
             event.target.reset();
-            callBack(title)
         });
-    };
+    }
 
     /**
      * @param {Todo[]} todos 
@@ -100,10 +95,3 @@ export default class TodoController {
     }
 }
 
-/**
-* @typedef {Object} EventDomain
-* @property {string} type
-* @property {string} id
-* @property {boolean} status
-* @property {string} input
-*/
