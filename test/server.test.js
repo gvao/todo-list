@@ -9,7 +9,7 @@ describe('server', () => {
     let _server
 
     before(async () => {
-        const { server } = await (import('../src/server.js'))
+        const { server } = await (import('../src/index.js'))
         _server = server.listen(PORT, () => console.log('server start!'))
 
         await new Promise(resolve => _server.on('listening', resolve))
