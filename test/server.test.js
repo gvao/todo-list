@@ -9,9 +9,8 @@ describe('server', () => {
     let _server
 
     before(async () => {
-        const { server } = await (import('../src/index.js'))
-        _server = server.listen(PORT, () => console.log('server start!'))
-
+        const { app } = await (import('../src/app.js'))
+        _server = app.listen(PORT, () => console.log('server start!'))
         await new Promise(resolve => _server.on('listening', resolve))
     })
 
@@ -26,7 +25,6 @@ describe('server', () => {
         })
         equal(response.status, 201)
         equal(response.ok, true)
-        const todos = await response.json()
     })
 
     it('should GET "/api/todos"', async () => {
@@ -34,8 +32,6 @@ describe('server', () => {
         const response = await fetch(url)
         equal(response.ok, true)
         equal(response.status, 200)
-
-        console.log(await response.json())
     })
 
 
