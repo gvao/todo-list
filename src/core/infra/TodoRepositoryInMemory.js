@@ -1,19 +1,8 @@
 import Repository from "../application/Repository.interface.js";
 import Todo from "../domain/Todo.js";
 
-
-const todos = [
-    Todo.create("Fazer isso"),
-    Todo.create("Fazer aquilo"),
-    Todo.create("Fazer tal coisa"),
-    Todo.create("Musculação"),
-];
-
-todos[1].done()
-todos[2].done()
-
 export default class TodoRepositoryInMemory extends Repository {
-    #todos = todos
+    #todos = []
 
     notify = () => this.emit(this.#todos)
     subscribe = listener => this.on(listener)
