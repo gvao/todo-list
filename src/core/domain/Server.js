@@ -3,12 +3,9 @@ import Routes from './Routes.js'
 
 export default class Server {
     #server
-    /** @type {Routes} */
-    routes
 
     /** @param {Routes} routes  */
     constructor(routes) {
-        this.routes = routes
         this.#server = http.createServer(async function (req, res) {
             const { url, method } = req
 
@@ -17,5 +14,7 @@ export default class Server {
         })
     }
 
-    get server() { return this.#server }
+    listen(port, callback) {
+        return this.#server.listen(port, callback)
+    }
 }
