@@ -1,4 +1,4 @@
-import createElement from "../utils/createdElement.js";
+import createElement from "../../public/createdElement.js";
 import Todo from "../domain/Todo.js";
 import Observer from "../domain/observer.js";
 
