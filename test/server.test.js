@@ -23,15 +23,44 @@ describe('server', () => {
             },
             body: JSON.stringify({ title: 'any_title' })
         })
+        await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: 'outer_title' })
+        })
         equal(response.status, 201)
         equal(response.ok, true)
     })
 
-    it('should GET "/api/todos"', async () => {
-        const url = `http://localhost:${PORT}/api/todos`
-        const response = await fetch(url)
-        equal(response.ok, true)
-        equal(response.status, 200)
+    describe('GET', function () {
+        it('#/api/todos return all todos ', async () => {
+            const url = `http://localhost:${PORT}/api/todos`
+            const response = await fetch(url)
+            equal(response.ok, true)
+            equal(response.status, 200)
+            const todoList = await response.json()
+            strictEqual(todoList.length, 2)
+        })
+
+        it('#/api/todos?search={parameter} return todo list filtered ', async () => {
+            const url = `http://localhost:${PORT}/api/todos?search=outer`
+            const response = await fetch(url)
+            const todos = await response.json()
+            const todoExpected = todos.find(todo => todo.title.includes('outer'))
+
+            strictEqual(todos.length, 1)
+            strictEqual(todoExpected.title, 'outer_title')
+        })
+
+        it('#/api/todos?search={parameter} parameter not found ', async () => {
+            const url = `http://localhost:${PORT}/api/todos?search=not_found`
+            const response = await fetch(url)
+            const todos = await response.json()
+            strictEqual(todos.length, 0)
+        })
+
     })
 
 
