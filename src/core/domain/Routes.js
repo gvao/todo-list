@@ -44,9 +44,15 @@ export default class Routes {
         }
     }
 
-    getRoute(uri, method) {
-        const [url, queries] = uri.split('?')
-        return this.#routes.find(route => route.path === url && route.method === method)
+    /**
+     * 
+     * @param {URL} url 
+     * @param {string} method 
+     * @returns {Route | undefined}
+     */
+    getRoute(url, method) {
+        const { pathname } = url
+        return this.#routes.find(route => route.path === pathname && route.method === method)
     }
 
     /** @param {Route} route  */

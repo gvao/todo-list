@@ -7,13 +7,9 @@ export default class Server {
     /** @param {Routes} routes  */
     constructor(routes) {
         this.#server = http.createServer(async function (req, res) {
-            const { url, method } = req
-
-            const route = routes.getRoute(url, method)
-            if(!!route) {
-                console.log(url, method, route)
-                return await route.handler(req, res)
-            }
+            const url = new URL(req.url, `http://${req.headers.host}`);
+            const route = routes.getRoute(url, req.method)
+            if(!!route) return await route.handler(req, res)
             
             res.statusCode = 404
             
