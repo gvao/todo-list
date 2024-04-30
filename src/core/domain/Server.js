@@ -10,7 +10,13 @@ export default class Server {
             const { url, method } = req
 
             const route = routes.getRoute(url, method)
-            return await route.handler(req, res)
+            if(!!route) {
+                console.log(url, method, route)
+                return await route.handler(req, res)
+            }
+            
+            res.statusCode = 404
+            
         })
     }
 
