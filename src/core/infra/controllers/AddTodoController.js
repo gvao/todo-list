@@ -18,7 +18,7 @@ export default class AddTodoController {
                 const result = Buffer.concat(chunks).toString()
                 const body = JSON.parse(result)
         
-                addTodo.execute(body.title)
+                this.addTodo.execute(body.title)
                 res.writeHead(201, { "Content-Type": "application/json" })
                 res.end(JSON.stringify({ message: `Todo created!` }))
             })
