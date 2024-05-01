@@ -16,20 +16,25 @@ describe('server', () => {
 
     it('should POST "/api/todos"', async () => {
         const url = `http://localhost:${PORT}/api/todos`
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title: 'any_title' })
-        })
-        await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title: 'outer_title' })
-        })
+        const responses = [
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: 'any_title' })
+            }),
+            fetch(url, {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({ title: 'outer_title' })
+           })
+
+        ]
+        const [ response ] = await Promise.all(responses)
+
         equal(response.status, 201)
         equal(response.ok, true)
     })
