@@ -20,6 +20,7 @@ const app = new Server(routes)
 
 const publicPath = path.join('src', 'public')
 
+app.use(Server.jsonParse)
 app.staticPath(publicPath)
 app.addRoute(getTodoListController.controller())
 app.addRoute(addTodoController.controller())

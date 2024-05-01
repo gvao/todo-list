@@ -42,6 +42,24 @@ export default class Server {
         return server.listen(port, callback)
     }
 
+    /** @type {Middleware} */
+    static jsonParse(req, res, next) {
+        const isApplicationJson = req.headers['content-type'] === 'application/json'
+        if (!isApplicationJson) {
+            next()
+            return 
+        }
+
+        const chunks = []
+        req.on('data', chunks.push)
+        req.on('end', () => {
+            const result = Buffer.concat(chunks).toString()
+            const body = JSON.parse(result)
+            req.body = body
+            next()
+        })
+    }
+
 }
 
 
