@@ -5,29 +5,46 @@ import Route from './Route.js'
 export default class Server {
     /** @type {Routes} */
     #routes
+    /** @type {Middleware[]} */
+    #middleware = []
 
     /** @param {Routes} routes  */
     constructor(routes) {
-        this.routes = routes
+        this.#routes = routes
     }
 
     /** @param {Route} route */
     addRoute = (route) => { this.#routes.addRoute(route) }
     /** @param {string} path  */
     staticPath = async (path) => { this.#routes.usePublic(path) }
-    /** @param {any} middleware */
-    use = (middleware) => { this.middleware.push(middleware) }
+    /** @param {Middleware} middleware */
+    use = (middleware) => { this.#middleware.push(middleware) }
     /** @param {number} port @param {() => void} callback */
     listen = (port, callback) => {
-        const routes = this.#routes
+        const server = http.createServer((req, res) => {
+            let i = 0
+            const next = () => {
+                const middleware = this.#middleware[i++]
+                if (!!middleware) {
+                    middleware(req, res, next)
+                    return
+                }
 
-        const server = http.createServer(async function (req, res) {
-            const url = new URL(req.url, `http://${req.headers.host}`);
-            const route = routes.getRoute(url, req.method)
-            if (!!route) return await route.handler(req, res)
-            res.statusCode = 404
+                const url = new URL(req.url, `http://${req.headers.host}`);
+                const route = this.#routes.getRoute(url, req.method)
+                if (!!route) return route.handler(req, res)
+                res.statusCode = 404
+                res.end('not found')
+            }
+            next()
         })
 
         return server.listen(port, callback)
     }
+
 }
+
+
+/** @typedef {(req: Request, res: Response, next: Function) => void} Middleware */
+/** @typedef {http.IncomingMessage} Request */
+/** @typedef {http.ServerResponse<http.IncomingMessage> & {req: http.IncomingMessage;}} Response */

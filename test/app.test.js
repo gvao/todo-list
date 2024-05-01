@@ -2,7 +2,7 @@ import { equal, strictEqual } from 'node:assert'
 import { Server } from 'node:http'
 import { after, before, describe, it } from 'node:test'
 
-describe('server', () => {
+describe('app', () => {
 
     const PORT = 3333
     /**@type {Server<typeof IncomingMessage, typeof ServerResponse>} */
