@@ -11,6 +11,10 @@ class TodoGateway {
     async addTodo(title) {
         const response = await fetcher('/api/todos', 'POST', { title })
     }
+
+    async deleteTodo(id){
+        fetcher(`/api/todos/${id}`, 'DELETE')
+    }
 }
 
 async function fetcher(url, method = 'GET', body) {
