@@ -51,7 +51,7 @@ export default class Server {
         }
 
         const chunks = []
-        req.on('data', chunks.push)
+        req.on('data', chunk =>  chunks.push(chunk))
         req.on('end', () => {
             const result = Buffer.concat(chunks).toString()
             const body = JSON.parse(result)
