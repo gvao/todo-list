@@ -1,35 +1,23 @@
+const todoGateway = new TodoGateway()
 const todoController = new TodoController()
 
-async function getTodos() {
-    const response = await fetch('/api/todos')
-    const json = await response.json()
-
-    return json
+async function updateTodoList(input) {
+    const todos = await todoGateway.getAll(input)
+    todoController.render(todos)
 }
-
-async function addNewTodo(title) {
-    const response = await fetch('/api/todos', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ title })
-    })
-
-    return await response.json()
-}
-
-updateTodoList()
 
 todoController.on(async ({ type, input }) => {
+    console.log(type, input,)
+
     if (type == 'submit') {
-        const result = await addNewTodo(input)
-        console.log(result)
+        await todoGateway.addTodo(input)
         updateTodoList()
+        return
     }
-    console.log(type, input)
+
+    if (type === 'search') {
+        updateTodoList(input)
+    }
 })
 
-function updateTodoList() {
-    getTodos()
-        .then(todoController.render)
-        .catch(console.error)
-}
+updateTodoList()
