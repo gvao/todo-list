@@ -12,19 +12,18 @@ describe('GetAllTodo', () => {
         const todo = Todo.create('any_title')
         repository.save(todo)
         const todos = getAllTodo.execute()
-        console.log(todos)
         strictEqual(todos.length, 1)
     })
 })
 
 class todoRepository extends Repository {
     todos = []
-    getAll() { 
+    getAll() {
         return this.todos
     }
 
     /** @param {Todo} todo  */
-    save(todo){
+    save(todo) {
         this.todos.push(todo)
     }
 }

@@ -4,9 +4,6 @@ import Todo from "../domain/Todo.js";
 export default class TodoRepositoryInMemory extends Repository {
     #todos = []
 
-    notify = () => this.emit(this.#todos)
-    subscribe = listener => this.on(listener)
-
     /**  @param {Todo} todo  */
     save(todo) {
         const index = this.#todos.findIndex(todoFind => todoFind.id === todo.id)
@@ -14,7 +11,6 @@ export default class TodoRepositoryInMemory extends Repository {
             this.addTodo(todo)
         }
         this.#todos.splice(index, 1, todo)
-        this.notify()
     }
 
     getAll() {
@@ -29,7 +25,6 @@ export default class TodoRepositoryInMemory extends Repository {
         const index = this.#todos.findIndex(todo => todo.id === id)
         if (index < 0) return console.log(`Item not found in list`)
         this.#todos.splice(index, 1)
-        this.notify()
     }
 
     /**
@@ -38,7 +33,6 @@ export default class TodoRepositoryInMemory extends Repository {
     */
     addTodo(todo) {
         this.#todos.push(todo);
-        this.notify()
     }
 
 }

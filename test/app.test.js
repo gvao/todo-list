@@ -1,13 +1,16 @@
 import { equal, strictEqual } from 'node:assert'
 import { Server } from 'node:http'
 import { after, before, describe, it } from 'node:test'
+import Todo from '../src/core/domain/Todo.js'
 
 describe('app', () => {
 
     const PORT = 3333
     /**@type {Server<typeof IncomingMessage, typeof ServerResponse>} */
     let _server
-
+    /** @type {Todo[]} */
+    const fakeTodos = []
+    
     before(async () => {
         const { app } = await (import('../src/app.js'))
         _server = app.listen(PORT, () => console.log('server start!'))
@@ -47,6 +50,7 @@ describe('app', () => {
             equal(response.status, 200)
             const todoList = await response.json()
             strictEqual(todoList.length, 2)
+            fakeTodos.push(...todoList)
         })
 
         it('#/api/todos?search={parameter} return todo list filtered ', async () => {
@@ -68,6 +72,12 @@ describe('app', () => {
 
     })
 
+    it('DELETE "/api/todos/:id"',async () => {
+        const [firstTodo] = fakeTodos
+        const url = `http://localhost:${PORT}/api/todos/${firstTodo.id}`
+        const response = await fetch(url, { method: "DELETE" })
+        strictEqual(response.status, 201)
+    })
 
     after(done => _server.close(() => console.log(`close server!`)))
 })
