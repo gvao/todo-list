@@ -22,24 +22,27 @@ export default class Routes {
             const filesName = await fs.readdir(pathName)
             for (const name of filesName) {
                 const filePath = path.join(pathName, name)
-                const type = Routes.getTypeFile(name)
                 const routePathFile = filePath.replace(this.basename, "")
-                if (!type) return await this.usePublic(filePath)
-                const route = new Route(
-                    'GET',
-                    routePathFile === '/index.html' ? '/' : routePathFile,
-                    async (req, res) => {
-                        if (req.method !== 'GET') {
-                            res.writeHead(404)
-                            return res.end('Page not found!')
+                const type = Routes.getTypeFile(name)
+                if (!type) await this.usePublic(filePath)
+                else {
+                    const route = new Route(
+                        'GET',
+                        routePathFile === '/index.html' ? '/' : routePathFile,
+                        async (req, res) => {
+                            if (req.method !== 'GET') {
+                                res.writeHead(404)
+                                return res.end('Page not found!')
+                            }
+                            const file = await fs.readFile(filePath)
+                            res.writeHead(200, { "content-type": `text/${type}` })
+                            res.end(file)
+                            return
                         }
-                        const file = await fs.readFile(filePath)
-                        res.writeHead(200, { "content-type": `text/${type}` })
-                        res.end(file)
-                        return
-                    }
-                )
-                this.addRoute(route)
+                    )
+                    this.addRoute(route)
+                }
+
             }
         }
     }
