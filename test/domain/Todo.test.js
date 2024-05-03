@@ -5,7 +5,6 @@ import Todo from "../../src/core/domain/Todo.js";
 describe('Todo', () => {
     it('should create a new Todo', () => {
         const todo = Todo.create('any_title')
-        console.log(`>>>>>`, todo);
         strictEqual(todo.title, 'any_title')
     })
 

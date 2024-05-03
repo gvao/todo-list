@@ -11,7 +11,7 @@ describe('app', () => {
     /** @type {Todo[]} */
     const fakeTodos = []
     const URL_BASE = `http://localhost:${PORT}`
-    
+
     before(async () => {
         const { app } = await (import('../src/app.js'))
         _server = app.listen(PORT, () => console.log('server start!'))
@@ -29,15 +29,15 @@ describe('app', () => {
                 body: JSON.stringify({ title: 'any_title' })
             }),
             fetch(url, {
-               method: 'POST',
-               headers: {
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify({ title: 'outer_title' })
-           })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: 'outer_title' })
+            })
 
         ]
-        const [ response ] = await Promise.all(responses)
+        const [response] = await Promise.all(responses)
 
         equal(response.status, 201)
         equal(response.ok, true)
@@ -73,7 +73,24 @@ describe('app', () => {
 
     })
 
-    it('DELETE "/api/todos/:id"',async () => {
+    it('POST "/api/todos/:id/changeStatus" update isDone property by Todo', async () => {
+        const [firstTodo] = fakeTodos
+        const url = `${URL_BASE}/api/todos/${firstTodo.id}/changeStatus`
+        const result = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({ status: true }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        strictEqual(result.status, 201)
+
+        const response = await fetch(`${URL_BASE}/api/todos`)
+        const todos = await response.json()
+        const todo = todos.find(todo => todo.id === firstTodo.id)
+        strictEqual(todo.isDone, true)
+
+    })
+
+    it('DELETE "/api/todos/:id"', async () => {
         const [firstTodo, secondsTodo] = fakeTodos
         const url = `http://localhost:${PORT}/api/todos/${firstTodo.id}`
         const responseFirst = await fetch(url, { method: "DELETE" })

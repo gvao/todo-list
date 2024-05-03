@@ -12,9 +12,7 @@ describe('Route', function () {
     it('Created Route', () => {
         const method = 'GET'
         const path = '/api/'
-        const route = new Route(method, path, (req, res) => {
-            console.log(req, res)
-        })
+        const route = new Route(method, path, (req, res) => { })
 
         strictEqual(route.method, 'GET')
         strictEqual(route.path, '/api/')
@@ -25,7 +23,6 @@ describe('Route', function () {
 
         it('Should return a parameters path', function () {
             const route = makeSut({})
-            console.log(route)
             const fakePath = '/api/any_id'
             const parameters = route.getParameters(fakePath)
             strictEqual(parameters.id, 'any_id')
