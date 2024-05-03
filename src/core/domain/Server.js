@@ -32,7 +32,11 @@ export default class Server {
 
                 const url = new URL(req.url, `http://${req.headers.host}`);
                 const route = this.#routes.getRoute(url, req.method)
-                if (!!route) return route.handler(req, res)
+                if (!!route) {
+                    const params = route.getParameters(url.pathname)
+                    req.params = params
+                    return route.handler(req, res)
+                }
                 res.statusCode = 404
                 res.end('not found')
             }

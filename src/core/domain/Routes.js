@@ -54,8 +54,19 @@ export default class Routes {
      * @returns {Route | undefined}
      */
     getRoute(url, method) {
-        const { pathname } = url
-        return this.#routes.find(route => route.path === pathname && route.method === method)
+        const { pathname, } = url
+        const route = this.#routes.find(route => {
+            const pathSplited = route.path.split('/')
+            const pathnameSplited = pathname.split('/')
+            if(pathSplited.length !== pathnameSplited.length) return 
+            const isPathValid = pathSplited.every((each, i) => {
+                const isEqual = each === pathnameSplited[i]
+                return isEqual || each.startsWith(":")
+            })
+
+            return isPathValid && route.method === method
+        })
+        return route
     }
 
     /** @param {Route} route  */
