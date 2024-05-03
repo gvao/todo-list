@@ -5,15 +5,19 @@ import GetAllTodo from "./core/application/useCases/GetAllTodo.js";
 import Routes from "./core/domain/Routes.js";
 import TodoRepositoryInMemory from "./core/infra/TodoRepositoryInMemory.js";
 import Server from './core/domain/Server.js';
-import GetTodoListController from './core/infra/controllers/getTodoList.js';
+import GetTodoListController from './core/infra/controllers/GetTodoList.js';
 import AddTodoController from './core/infra/controllers/AddTodoController.js';
+import RemoveTodoController from './core/infra/controllers/RemoveTodo.js';
+import RemoveTodo from './core/application/useCases/RemoveTodo.js';
 
 const todoRepository = new TodoRepositoryInMemory()
 const getAllTodo = new GetAllTodo(todoRepository)
 const addTodo = new AddTodo(todoRepository)
+const removeTodo = new RemoveTodo(todoRepository)
 
 const addTodoController = new AddTodoController(addTodo)
 const getTodoListController = new GetTodoListController(getAllTodo)
+const removeTodoController = new RemoveTodoController(removeTodo)
 
 const routes = new Routes()
 const app = new Server(routes)
@@ -24,6 +28,6 @@ app.use(Server.jsonParse)
 app.staticPath(publicPath)
 app.addRoute(getTodoListController.controller())
 app.addRoute(addTodoController.controller())
-
+app.addRoute(removeTodoController.controller())
 
 export { app }

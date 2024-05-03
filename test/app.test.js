@@ -10,6 +10,7 @@ describe('app', () => {
     let _server
     /** @type {Todo[]} */
     const fakeTodos = []
+    const URL_BASE = `http://localhost:${PORT}`
     
     before(async () => {
         const { app } = await (import('../src/app.js'))
@@ -18,7 +19,7 @@ describe('app', () => {
     })
 
     it('should POST "/api/todos"', async () => {
-        const url = `http://localhost:${PORT}/api/todos`
+        const url = `${URL_BASE}/api/todos`
         const responses = [
             fetch(url, {
                 method: 'POST',
@@ -44,7 +45,7 @@ describe('app', () => {
 
     describe('GET', function () {
         it('#/api/todos return all todos ', async () => {
-            const url = `http://localhost:${PORT}/api/todos`
+            const url = `${URL_BASE}/api/todos`
             const response = await fetch(url)
             equal(response.ok, true)
             equal(response.status, 200)
@@ -73,10 +74,16 @@ describe('app', () => {
     })
 
     it('DELETE "/api/todos/:id"',async () => {
-        const [firstTodo] = fakeTodos
+        const [firstTodo, secondsTodo] = fakeTodos
         const url = `http://localhost:${PORT}/api/todos/${firstTodo.id}`
-        const response = await fetch(url, { method: "DELETE" })
-        strictEqual(response.status, 201)
+        const responseFirst = await fetch(url, { method: "DELETE" })
+        const responseSecond = await fetch(`${URL_BASE}/api/todos/${secondsTodo.id}`, { method: "DELETE" })
+        strictEqual(responseFirst.status, 201)
+        strictEqual(responseSecond.status, 201)
+        const responseGet = await fetch(`${URL_BASE}/api/todos`)
+        const todoList = await responseGet.json()
+        strictEqual(todoList.length, 0)
+
     })
 
     after(done => _server.close(() => console.log(`close server!`)))
