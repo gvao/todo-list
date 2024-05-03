@@ -21,7 +21,7 @@ async function fetcher(url, method = 'GET', body) {
     const options = {
         method,
     }
-    if (method !== 'GET') {
+    if (method !== 'GET' && !!body) {
         options.headers = { 'Content-Type': 'application/json' }
         options.body = JSON.stringify(body)
     }

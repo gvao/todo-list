@@ -6,11 +6,16 @@ async function updateTodoList(input) {
     todoController.render(todos)
 }
 
-todoController.on(async ({ type, input, id }) => {
-    console.log(type, input, id)
+todoController.on(async (args) => {
+    const { type, input, id } = args
+    console.log(args)
     
     if (type === 'search') return updateTodoList(input)
-    if (type === 'remove') return todoGateway.deleteTodo(id)
+    if (type === 'remove') {
+        todoGateway.deleteTodo(id)
+        updateTodoList()
+        return 
+    }
     if (type == 'submit') {
         await todoGateway.addTodo(input)
         updateTodoList()
