@@ -9,8 +9,8 @@
     "test": "node --test ./",
     "test:dev": "reset && node --watch --test ./",
     "test:debug": "node --inspect --watch --trace-warnings --test ./",
-    "build": "ls -la", 
-    "start": "node ."
+    "build": "pwd", 
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
