@@ -9,7 +9,7 @@
     "test": "node --test ./",
     "test:dev": "reset && node --watch --test ./",
     "test:debug": "node --inspect --watch --trace-warnings --test ./",
-    "build": "", 
+    "build": "ls -la", 
     "start": "node ."
   },
   "keywords": [],
