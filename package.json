@@ -8,7 +8,9 @@
     "dev": "node --watch --trace-warnings .",
     "test": "node --test ./",
     "test:dev": "reset && node --watch --test ./",
-    "test:debug": "node --inspect --watch --trace-warnings --test ./"
+    "test:debug": "node --inspect --watch --trace-warnings --test ./",
+    "build": "", 
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
