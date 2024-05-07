@@ -30,10 +30,14 @@ class TodoController {
      * @param {Todo[]} todos 
      */
     render = (todos) => {
-        this.todoList.innerHTML = ''
+        const doArea = this.todoList.querySelector('.todo-list__do')
+        const doneArea = this.todoList.querySelector('.todo-list__done')
+        doArea.innerHTML = '<h2>Do</h2>'
+        doneArea.innerHTML = '<h2>Done</h2>'
         todos.forEach((todo) => {
             const li = this.createTodoElement(todo)
-            this.todoList.appendChild(li)
+            if (todo.isDone) doneArea.appendChild(li)
+            else doArea.appendChild(li)
         })
     }
 

@@ -17,7 +17,6 @@ class TodoGateway {
     }
 
     async changeStatus(id, status){
-        console.log('changeStatus ', id, status)
         fetcher(`/api/todos/${id}/changeStatus`, 'POST', { status })
     }
 }
