@@ -7,14 +7,14 @@
     margin-top: 20px;
 }
 
-#todos > ul {
+#todos ul {
     display: flex;
     flex-direction: column;
-    
+
     gap: var(--pd-medium);
 }
 
-#todos > ul li {
+#todos ul li {
     background-color: var(--color-secondary);
     border-radius: var(--radius-default);
     padding: var(--pd-medium) var(--pd-default);
