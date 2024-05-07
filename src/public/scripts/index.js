@@ -7,8 +7,7 @@ async function updateTodoList(input) {
 }
 
 todoController.on(async (args) => {
-    const { type, input, id } = args
-    console.log(args)
+    const { type, input, id, status } = args
     
     if (type === 'search') return updateTodoList(input)
     if (type === 'remove') {
@@ -18,6 +17,11 @@ todoController.on(async (args) => {
     }
     if (type == 'submit') {
         await todoGateway.addTodo(input)
+        updateTodoList()
+        return
+    }
+    if (type == 'checked') {
+        await todoGateway.changeStatus(id, status)
         updateTodoList()
         return
     }

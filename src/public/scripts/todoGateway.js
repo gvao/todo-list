@@ -15,6 +15,11 @@ class TodoGateway {
     async deleteTodo(id){
         fetcher(`/api/todos/${id}`, 'DELETE')
     }
+
+    async changeStatus(id, status){
+        console.log('changeStatus ', id, status)
+        fetcher(`/api/todos/${id}/changeStatus`, 'POST', { status })
+    }
 }
 
 async function fetcher(url, method = 'GET', body) {
