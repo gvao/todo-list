@@ -11,7 +11,7 @@ export default class Todo {
      * @param {boolean} isDone
      */
     constructor(title, id, isDone) {
-        if (!title) return alert('inserir um valor válido');
+        if (!title) return new Error('inserir um valor válido');
         this.#title = title
         this.#id = id
         this.#isDone = isDone
