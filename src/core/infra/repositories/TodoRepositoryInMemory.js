@@ -1,5 +1,5 @@
-import Repository from "../application/Repository.interface.js";
-import Todo from "../domain/Todo.js";
+import Repository from "../../application/Repository.interface.js";
+import Todo from "../../domain/Todo.js";
 
 export default class TodoRepositoryInMemory extends Repository {
     #todos = []

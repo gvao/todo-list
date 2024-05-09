@@ -74,7 +74,5 @@ export default class Routes {
         this.#routes.push(route)
     }
 
-    static getTypeFile = (filePath) => {
-        return Routes.fileTypes.find(type => filePath.endsWith(type))
-    }
+    static getTypeFile = (filePath) => Routes.fileTypes.find(type => filePath.endsWith(type))
 }
