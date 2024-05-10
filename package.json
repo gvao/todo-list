@@ -2,16 +2,21 @@
   "name": "todo-list",
   "version": "1.0.0",
   "description": "![Todo List](/project-apresentation.png)",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "node --watch --trace-warnings .",
+    "dev": "node --watch --trace-warnings ./dist/index.js",
     "test": "node --test ./",
     "test:dev": "reset && node --watch --test ./",
     "test:debug": "node --inspect --watch --trace-warnings --test ./",
-    "build": "pwd", 
-    "start": "node src/index.js"
+    "build:dev": "npx tsc --watch ",
+    "build": "npx tsc",
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.11",
+    "typescript": "^5.4.5"
+  }
 }
