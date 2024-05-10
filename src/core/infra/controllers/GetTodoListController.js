@@ -1,5 +1,5 @@
 const GetAllTodo = require("../../application/useCases/GetAllTodo.js")
-const Route = require("../../infra/Route.js")
+const Route = require("../Route.js")
 
 module.exports = class GetTodoListController {
     /**@param {GetAllTodo} getAllTodo  */

@@ -9,7 +9,7 @@ const GetAllTodo = require("./core/application/useCases/GetAllTodo.js")
 const RemoveTodo = require('./core/application/useCases/RemoveTodo.js')
 const UpdateTodoStatus = require('./core/application/useCases/UpdateTodoStatus.js')
 
-const GetTodoListController = require('./core/infra/controllers/GetTodoList.js')
+const GetTodoListController = require('./core/infra/controllers/GetTodoListController.js')
 const AddTodoController = require('./core/infra/controllers/AddTodoController.js')
 const RemoveTodoController = require('./core/infra/controllers/RemoveTodo.js')
 const UpdateTodoStatusController = require('./core/infra/controllers/UpdateTodoStatus.js')
