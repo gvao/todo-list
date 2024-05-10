@@ -1,15 +1,16 @@
-const GetAllTodo = require("../../application/useCases/GetAllTodo.js")
-const Route = require("../Route.js")
+import GetAllTodo from "../../application/useCases/GetAllTodo"
+import Route from "../Route.js"
+import { Middleware } from "../types"
 
-module.exports = class GetTodoListController {
-    /**@param {GetAllTodo} getAllTodo  */
-    constructor(getAllTodo) {
+export default class GetTodoListController {
+    getAllTodo
+    constructor(getAllTodo: GetAllTodo) {
         this.getAllTodo = getAllTodo
     }
 
     controller() {
         return new Route('GET', '/api/todos', (req, res) => {
-            const url = new URL(req.url, `http://${req.headers.host}`)
+            const url = new URL(req.url!, `http://${req.headers.host}`)
             const search = url.searchParams.get('search')
             res.writeHead(200, { 'Content-Type': 'application/json' })
             const allTodoList = this.getAllTodo.execute()

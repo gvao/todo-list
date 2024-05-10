@@ -1,6 +1,7 @@
-const { newId } = require("../utils/newId.js")
+import { newId } from "../utils/newId.js"
+import { TodoDto } from "./types.js";
 
-module.exports = class Todo {
+export default class Todo {
     #id
     #isDone
     #title
@@ -10,8 +11,8 @@ module.exports = class Todo {
      * @param {string} id 
      * @param {boolean} isDone
      */
-    constructor(title, id, isDone) {
-        if (!title) return new Error('inserir um valor válido');
+    constructor(title: string, id: string, isDone: boolean) {
+        if (!title) throw new Error('inserir um valor válido');
         this.#title = title
         this.#id = id
         this.#isDone = isDone
@@ -28,15 +29,14 @@ module.exports = class Todo {
     /**
      * @param {string} title 
      */
-    static create(title) {
+    static create(title: string) {
         const id = newId()
         const isDone = false
-
         const todo = new Todo(title, id, isDone)
         return todo
     }
 
-    get dto() {
+    get dto(): TodoDto {
         return {
             title: this.#title,
             id: this.#id,

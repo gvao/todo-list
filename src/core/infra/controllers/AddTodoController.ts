@@ -1,9 +1,9 @@
-const AddTodo = require("../../application/useCases/AddTodo.js")
-const Route = require("../../infra/Route.js")
+import AddTodo from "../../application/useCases/AddTodo.js"
+import Route from "../../infra/Route.js"
 
-module.exports = class AddTodoController {
-    /**@param {AddTodo} addTodo  */
-    constructor(addTodo) {
+export default class AddTodoController {
+    addTodo
+    constructor(addTodo: AddTodo) {
         this.addTodo = addTodo
     }
 

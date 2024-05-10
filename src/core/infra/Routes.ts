@@ -1,18 +1,19 @@
-const path = require('node:path')
-const fs = require('node:fs/promises')
-const Route = require('./Route.js')
+import path from 'node:path'
+import fs from 'node:fs/promises'
+import Route from './Route.js'
+import { Method } from './types'
 
-module.exports = class Routes {
+export default class Routes {
     static fileTypes = ['html', 'css', 'js']
     /** @type {Route[]} */
-    #routes = []
-    basename
+    #routes: Route[] = []
+    basename?: string
 
     constructor() { }
 
     get routes() { return this.#routes }
 
-    async usePublic(pathName) {
+    async usePublic(pathName: string) {
         if (!this.basename) this.basename = pathName;
         const routePath = pathName.replace(this.basename, '') || '/'
         const typeFile = Routes.getTypeFile(routePath)
@@ -53,7 +54,7 @@ module.exports = class Routes {
      * @param {string} method 
      * @returns {Route | undefined}
      */
-    getRoute(url, method) {
+    getRoute(url: URL, method: Method) {
         const { pathname, } = url
         const route = this.#routes.find(route => {
             const pathSplited = route.path.split('/')
@@ -69,10 +70,9 @@ module.exports = class Routes {
         return route
     }
 
-    /** @param {Route} route  */
-    addRoute(route) {
+    addRoute(route: Route) {
         this.#routes.push(route)
     }
 
-    static getTypeFile = (filePath) => Routes.fileTypes.find(type => filePath.endsWith(type))
+    static getTypeFile = (filePath: string) => Routes.fileTypes.find(type => filePath.endsWith(type))
 }

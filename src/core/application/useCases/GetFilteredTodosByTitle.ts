@@ -1,13 +1,12 @@
-const Repository = require("../Repository.interface.js");
+import Todo from "../../domain/Todo";
+import Repository from "../Repository.interface"
 
-module.exports = class GetFilteredTodosByTitle {
+export default class GetFilteredTodosByTitle {
     #todoRepository
-    /** @param {Repository} todoRepository  */
-    constructor(todoRepository) {
+    constructor(todoRepository: Repository<Todo>) {
         this.#todoRepository = todoRepository;
     }
-    /** @param {string} search  */
-    execute(search) {
+    execute(search: string) {
         const todos = this.#todoRepository.getAll()
         if (!search) return todos
         const searchToLowerCase = search.toLowerCase()

@@ -1,11 +1,10 @@
-const Repository = require("../../application/Repository.interface.js");
-const Todo = require("../../domain/Todo.js");
+import Repository from '../../application/Repository.interface'
+import Todo from "../../domain/Todo";
 
-module.exports = class TodoRepositoryInMemory extends Repository {
-    #todos = []
+export default class TodoRepositoryInMemory implements Repository<Todo> {
+    #todos: Todo[] = []
 
-    /**  @param {Todo} todo  */
-    save(todo) {
+    save(todo: Todo) {
         const index = this.#todos.findIndex(todoFind => todoFind.id === todo.id)
         if (index < 0) {
             this.addTodo(todo)
@@ -17,21 +16,16 @@ module.exports = class TodoRepositoryInMemory extends Repository {
         return this.#todos;
     }
 
-    getById(id) {
+    getById(id: string) {
         return this.#todos.find(todo => todo.id === id);
     }
 
-    deleteById(id) {
+    deleteById(id: string) {
         const index = this.#todos.findIndex(todo => todo.id === id)
         if (index < 0) return console.log(`Item not found in list`)
         this.#todos.splice(index, 1)
     }
-
-    /**
-     * @private
-     * @param {Todo} todo 
-    */
-    addTodo(todo) {
+    addTodo(todo: Todo) {
         this.#todos.push(todo);
     }
 
