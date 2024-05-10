@@ -1,4 +1,4 @@
-export default class Repository {
+module.exports = class Repository {
     save(item) {
         throw new Error('method not implemented')
     }
