@@ -29,7 +29,7 @@ const updateTodoStatusController = new UpdateTodoStatusController(updateTodoStat
 const routes = new Routes()
 const app = new Server(routes)
 
-const publicPath = join('src', 'public')
+const publicPath = join('public')
 
 app.use(Server.jsonParse)
 app.staticPath(publicPath)
