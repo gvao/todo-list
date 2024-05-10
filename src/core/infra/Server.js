@@ -1,8 +1,8 @@
-import http from 'node:http'
-import Routes from './Routes.js'
-import Route from './Route.js'
+const http = require('node:http')
+const Routes = require('./Routes.js')
+const Route = require('./Route.js')
 
-export default class Server {
+module.exports = class Server {
     /** @type {Routes} */
     #routes
     /** @type {Middleware[]} */
@@ -51,11 +51,11 @@ export default class Server {
         const isApplicationJson = req.headers['content-type'] === 'application/json'
         if (!isApplicationJson) {
             next()
-            return 
+            return
         }
 
         const chunks = []
-        req.on('data', chunk =>  chunks.push(chunk))
+        req.on('data', chunk => chunks.push(chunk))
         req.on('end', () => {
             const result = Buffer.concat(chunks).toString()
             const body = JSON.parse(result)
@@ -65,7 +65,6 @@ export default class Server {
     }
 
 }
-
 
 /** @typedef {(req: Request, res: Response, next: Function) => void} Middleware */
 /** @typedef {http.IncomingMessage} Request */

@@ -1,7 +1,7 @@
-import UpdateTodoStatus from "../../application/useCases/UpdateTodoStatus.js"
-import Route from "../../domain/Route.js"
+const UpdateTodoStatus = require("../../application/useCases/UpdateTodoStatus.js")
+const Route = require("../../infra/Route.js")
 
-export default class UpdateTodoStatusController {
+module.exports = class UpdateTodoStatusController {
     /**@param {UpdateTodoStatus} updateTodoStatus  */
     constructor(updateTodoStatus) {
         this.updateTodoStatus = updateTodoStatus

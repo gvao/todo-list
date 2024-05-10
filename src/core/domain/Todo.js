@@ -1,6 +1,6 @@
-import { newId } from "../utils/newId.js"
+const { newId } = require("../utils/newId.js")
 
-export default class Todo {
+module.exports = class Todo {
     #id
     #isDone
     #title
@@ -20,7 +20,7 @@ export default class Todo {
     get title() { return this.#title; }
     get id() { return this.#id; }
     get isDone() { return this.#isDone; }
-    get test (){return 'test'}
+    get test() { return 'test' }
 
     done() { this.#isDone = true }
     undone() { this.#isDone = false }
@@ -36,7 +36,7 @@ export default class Todo {
         return todo
     }
 
-    get dto(){
+    get dto() {
         return {
             title: this.#title,
             id: this.#id,

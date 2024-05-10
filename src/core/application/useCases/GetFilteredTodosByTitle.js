@@ -1,6 +1,6 @@
-import Repository from "../Repository.interface.js";
+const Repository = require("../Repository.interface.js");
 
-export default class GetFilteredTodosByTitle {
+module.exports = class GetFilteredTodosByTitle {
     #todoRepository
     /** @param {Repository} todoRepository  */
     constructor(todoRepository) {

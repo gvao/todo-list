@@ -1,6 +1,6 @@
-import Repository from "../Repository.interface.js";
+const Repository = require("../Repository.interface.js");
 
-export default class UpdateTodoStatus {
+module.exports = class UpdateTodoStatus {
     /** @param {Repository} todoRepository */
     constructor(todoRepository) {
         this.todoRepository = todoRepository;

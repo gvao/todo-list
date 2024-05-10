@@ -2,7 +2,6 @@
   "name": "todo-list",
   "version": "1.0.0",
   "description": "![Todo List](/project-apresentation.png)",
-  "type": "module",
   "main": "src/index.js",
   "scripts": {
     "dev": "node --watch --trace-warnings .",

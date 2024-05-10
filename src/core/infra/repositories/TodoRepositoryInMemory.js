@@ -1,7 +1,7 @@
-import Repository from "../../application/Repository.interface.js";
-import Todo from "../../domain/Todo.js";
+const Repository = require("../../application/Repository.interface.js");
+const Todo = require("../../domain/Todo.js");
 
-export default class TodoRepositoryInMemory extends Repository {
+module.exports = class TodoRepositoryInMemory extends Repository {
     #todos = []
 
     /**  @param {Todo} todo  */

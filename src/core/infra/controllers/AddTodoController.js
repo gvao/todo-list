@@ -1,13 +1,13 @@
-import AddTodo from "../../application/useCases/AddTodo.js"
-import Route from "../../domain/Route.js"
+const AddTodo = require("../../application/useCases/AddTodo.js")
+const Route = require("../../infra/Route.js")
 
-export default class AddTodoController {
+module.exports = class AddTodoController {
     /**@param {AddTodo} addTodo  */
-    constructor(addTodo){
+    constructor(addTodo) {
         this.addTodo = addTodo
     }
 
-    controller(){
+    controller() {
         return new Route('POST', '/api/todos', (req, res) => {
             const body = req.body
             this.addTodo.execute(body.title)

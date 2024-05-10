@@ -1,18 +1,18 @@
-import path from 'node:path'
+const path = require('node:path');
 
-import Routes from "./core/domain/Routes.js";
-import Server from './core/domain/Server.js';
+const Routes = require("./core/infra/Routes.js")
+const Server = require('./core/infra/Server.js')
 
-import TodoRepositoryInMemory from "./core/infra/TodoRepositoryInMemory.js";
-import AddTodo from "./core/application/useCases/AddTodo.js";
-import GetAllTodo from "./core/application/useCases/GetAllTodo.js";
-import RemoveTodo from './core/application/useCases/RemoveTodo.js';
-import UpdateTodoStatus from './core/application/useCases/UpdateTodoStatus.js';
+const TodoRepositoryInMemory = require("./core/infra/repositories/TodoRepositoryInMemory.js")
+const AddTodo = require("./core/application/useCases/AddTodo.js")
+const GetAllTodo = require("./core/application/useCases/GetAllTodo.js")
+const RemoveTodo = require('./core/application/useCases/RemoveTodo.js')
+const UpdateTodoStatus = require('./core/application/useCases/UpdateTodoStatus.js')
 
-import AddTodoController from './core/infra/controllers/AddTodoController.js';
-import GetTodoListController from './core/infra/controllers/GetTodoList.js';
-import RemoveTodoController from './core/infra/controllers/RemoveTodo.js';
-import UpdateTodoStatusController from './core/infra/controllers/UpdateTodoStatus.js';
+const AddTodoController = require('./core/infra/controllers/AddTodoController.js')
+const GetTodoListController = require('./core/infra/controllers/GetTodoList.js')
+const RemoveTodoController = require('./core/infra/controllers/RemoveTodo.js')
+const UpdateTodoStatusController = require('./core/infra/controllers/UpdateTodoStatus.js')
 
 const todoRepository = new TodoRepositoryInMemory()
 
@@ -39,4 +39,4 @@ app.addRoute(addTodoController.controller())
 app.addRoute(removeTodoController.controller())
 app.addRoute(updateTodoStatusController.controller())
 
-export { app }
+module.exports = { app }

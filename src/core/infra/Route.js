@@ -1,6 +1,6 @@
-import http from 'node:http'
+const http = require('node:http')
 
-export default class Route {
+module.exports = class Route {
     method
     path
 
@@ -19,7 +19,7 @@ export default class Route {
     getParameters(pathRoute) {
         const keys = pathRoute.split('/')
         const k = this.path.split('/')
-        if(keys.length !== k.length) throw new Error('path length invalid')
+        if (keys.length !== k.length) throw new Error('path length invalid')
         const result = k.reduce((acc, key, i) => {
             const isParameter = key.startsWith(':')
             if (!isParameter) return acc
@@ -29,6 +29,6 @@ export default class Route {
             return acc
         }, {})
 
-        return result 
+        return result
     }
 }

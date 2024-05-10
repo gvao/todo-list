@@ -1,7 +1,7 @@
-import RemoveTodo from "../../application/useCases/RemoveTodo.js"
-import Route from "../../domain/Route.js"
+const RemoveTodo = require( "../../application/useCases/RemoveTodo.js")
+const Route = require( "../../infra/Route.js")
 
-export default class RemoveTodoController {
+module.exports = class RemoveTodoController {
     /**@param {RemoveTodo} removeTodo  */
     constructor(removeTodo) {
         this.removeTodo = removeTodo

@@ -1,8 +1,8 @@
-import fs from 'node:fs/promises'
-import Route from './Route.js'
-import path from 'node:path'
+const path = require('node:path')
+const fs = require('node:fs/promises')
+const Route = require('./Route.js')
 
-export default class Routes {
+module.exports = class Routes {
     static fileTypes = ['html', 'css', 'js']
     /** @type {Route[]} */
     #routes = []
@@ -58,7 +58,7 @@ export default class Routes {
         const route = this.#routes.find(route => {
             const pathSplited = route.path.split('/')
             const pathnameSplited = pathname.split('/')
-            if(pathSplited.length !== pathnameSplited.length) return 
+            if (pathSplited.length !== pathnameSplited.length) return
             const isPathValid = pathSplited.every((each, i) => {
                 const isEqual = each === pathnameSplited[i]
                 return isEqual || each.startsWith(":")
