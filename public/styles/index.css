@@ -1,48 +1,21 @@
-/* basics */
-@import url("./reset.css");
-@import url("./variables.css");
-
-/* components */
-@import url("./inputs.css");
-@import url("./buttons.css");
-@import url("./header.css");
-
-/* patterns */
-@import url("./todos.css");
-
+@import url('./variables.css');
+@import url('./reset.css');
 
 body {
     font-family: sans-serif, Helvetica, Arial;
+    min-height: 100%;
+    max-width: var(--max-width);
 
     background-color: var(--color-primary);
     color: var(--bg-primary);
+}
 
-    width: 100%;
-    max-width: var(--max-width);
-    min-width: var(--min-width);
-
+.main {
     margin: var(--margin-center);
     padding: var(--pd-default);
-
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--pd-medium);
-}
-
-#form-search {
-    display: flex;
-    align-items: center;
-    gap: var(--pd-medium);
-}
-
-.hidden {
-    display: none;
-}
-
-.container {
-    max-width: 760px;
-    width: 100%;
-    margin-top: 40px;
-    padding: 16px 8px;
 }
