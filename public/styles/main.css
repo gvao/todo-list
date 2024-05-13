@@ -1,5 +1,5 @@
 .main {
-    margin: var(--margin-center);
+    margin: 40px auto;
     padding: var(--pad-default);
     
     display: flex;
