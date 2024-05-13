@@ -1,11 +1,11 @@
 .main {
     margin: var(--margin-center);
-    padding: var(--pd-default);
+    padding: var(--pad-default);
     
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--pd-medium);
+    gap: var(--pad-medium);
 }
 
 .main-header {
