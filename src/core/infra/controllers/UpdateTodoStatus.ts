@@ -13,7 +13,7 @@ export default class UpdateTodoStatusController {
             const { status } = req.body
             this.updateTodoStatus.execute(id, status)
             res.statusCode = 201
-            res.end(() => { console.log(`ende controller Update status`) })
+            res.end()
         })
     }
 }
