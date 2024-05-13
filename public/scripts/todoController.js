@@ -41,17 +41,17 @@ class TodoController {
     }
 
     /**
-     * @param {Todo[]} todos 
+     * @param {Todo[]} todoList 
      */
-    render = (todos) => {
+    render = (todoList) => {
         for (let area of this.areas) {
-            area.innerHTML = ''
-            const statusArea = area.dataset.status
-            console.log(area)
-            todos.forEach((todo) => {
+            const list = area.querySelector('ul')
+            list.innerHTML = ''
+            const statusList = list.dataset.status
+            todoList.forEach((todo) => {
                 const li = this.createTodoElement(todo)
-                if (String(todo.isDone) !== statusArea) return
-                area.appendChild(li)
+                if (String(todo.isDone) !== statusList) return
+                list.appendChild(li)
             })
         }
     }
