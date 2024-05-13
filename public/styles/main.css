@@ -1,0 +1,21 @@
+.main {
+    margin: 40px auto;
+    padding: var(--pad-default);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--pad-default) * 2);
+}
+
+.main-header {
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+        opacity: .7;
+    }
+}

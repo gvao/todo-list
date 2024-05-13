@@ -14,12 +14,12 @@
 
     /* padding */
 
-    --pd-default: 16px;
-    --pd-medium: calc(var(--pd-default) / 2);
+    --pad-default: 16px;
+    --pad-medium: calc(var(--pad-default) / 2);
 
     /* radius */
 
-    --radius-default: 6px;
+    --radius-default: 4px;
 
     /* box-shadown */
 
