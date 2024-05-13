@@ -2,6 +2,7 @@
 @import url('./reset.css');
 
 @import url('./main.css');
+@import url('./form-search.css');
 
 body {
     font-family: sans-serif, Helvetica, Arial;

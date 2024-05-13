@@ -20,18 +20,16 @@
         <p>Tenha suas atividades listadas e organizadas!</p>
     </header>
 
-    <div id="todos">
-        <form id="form-search">
-            <input type="text" name="search" id="search" placeholder="Pesquise ou adicione" autofocus>
-            <button type="submit">New</button>
-        </form>
+    <form id="form-search" class="form-search">
+        <input class="form-search__search" type="text" name="search" id="search" placeholder="Pesquise ou adicione" autofocus>
+        <button type="submit">New</button>
+    </form>
 
-        <section id="todo-list">
-            <ul class="todo-list__do"></ul>
-            <ul class="todo-list__done"></ul>
-        </section>
-    </div>
-
+    <section id="todo-list">
+        <ul class="todo-list__do"></ul>
+        <ul class="todo-list__done"></ul>
+    </section>
+    
     <script src="./scripts/observer.js"></script>
     <script src="./scripts/todoGateway.js"></script>
     <script src="./scripts/createElement.js"></script>
