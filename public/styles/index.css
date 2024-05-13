@@ -1,6 +1,8 @@
 @import url('./variables.css');
 @import url('./reset.css');
 
+@import url('./main.css');
+
 body {
     font-family: sans-serif, Helvetica, Arial;
     min-height: 100%;
@@ -8,14 +10,4 @@ body {
 
     background-color: var(--color-primary);
     color: var(--bg-primary);
-}
-
-.main {
-    margin: var(--margin-center);
-    padding: var(--pd-default);
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--pd-medium);
 }
