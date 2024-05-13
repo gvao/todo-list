@@ -46,13 +46,24 @@ class TodoController {
     render = (todoList) => {
         for (let area of this.areas) {
             const list = area.querySelector('ul')
-            list.innerHTML = ''
+            const quantityElement = area.querySelector('.todo-list__quantity')
             const statusList = list.dataset.status
             todoList.forEach((todo) => {
                 const li = this.createTodoElement(todo)
                 if (String(todo.isDone) !== statusList) return
+                console.log(quantity)
                 list.appendChild(li)
             })
+
+            const resultQuantity = todoList.reduce((acc, todo) => {
+                const category = todo.isDone ? 'done' : 'do'
+                console.log(category, todo)
+                // if(!acc[category]) acc[category] = 0
+                // acc[category] = resultQuantity + 1
+                return acc
+            }, {})
+
+            console.log(resultQuantity)
         }
     }
 
