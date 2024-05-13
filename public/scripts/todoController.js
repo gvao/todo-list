@@ -1,4 +1,3 @@
-
 class TodoController {
     form
     inputSearch
@@ -9,6 +8,21 @@ class TodoController {
         this.form = document.querySelector('#form-search');
         this.inputSearch = this.form.search;
         this.todoList = document.querySelector('#todo-list');
+        this.areas = this.todoList.querySelectorAll('.todo-list__status-list')
+        this.areas.forEach(area => {
+            const icon = area.querySelector('i')
+            const list = area.querySelector('ul')
+            const checkBox = area.querySelector('input[type="checkbox"]')
+            checkBox.addEventListener('change', event => {
+                const chevronClassAdd = checkBox.checked ? 'down' : 'up'
+                const chevronClassRemove = !checkBox.checked ? 'down' : 'up'
+                const classIcon = icon.classList.item(1)
+                const newClassIcon = classIcon.replace(chevronClassRemove, chevronClassAdd)
+                icon.classList.remove(classIcon)
+                icon.classList.add(newClassIcon)
+                list.classList.toggle('--hidden')
+            })
+        })
 
         this.inputSearch.addEventListener('input', event => {
             const inputValue = event.target.value;
@@ -30,15 +44,16 @@ class TodoController {
      * @param {Todo[]} todos 
      */
     render = (todos) => {
-        const doArea = this.todoList.querySelector('.todo-list__do')
-        const doneArea = this.todoList.querySelector('.todo-list__done')
-        doArea.innerHTML = '<h2>Do</h2>'
-        doneArea.innerHTML = '<h2>Done</h2>'
-        todos.forEach((todo) => {
-            const li = this.createTodoElement(todo)
-            if (todo.isDone) doneArea.appendChild(li)
-            else doArea.appendChild(li)
-        })
+        for (let area of this.areas) {
+            area.innerHTML = ''
+            const statusArea = area.dataset.status
+            console.log(area)
+            todos.forEach((todo) => {
+                const li = this.createTodoElement(todo)
+                if (String(todo.isDone) !== statusArea) return
+                area.appendChild(li)
+            })
+        }
     }
 
     /**
