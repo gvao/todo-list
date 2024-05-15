@@ -75,6 +75,7 @@ export default class Routes {
             png: 'image/png',
             jpeg: 'image/jpeg',
             gif: 'image/gif',
+            ico: 'image/x-icon',
             css: 'text/css',
             js: 'text/js',
             html: 'text/html',
