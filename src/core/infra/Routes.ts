@@ -4,7 +4,17 @@ import Route from './Route.js'
 import { Method } from './types'
 
 export default class Routes {
-    static fileTypes = ['html', 'css', 'js', 'svg']
+    static types: Record<string, string> = {
+        svg: 'image/svg+xml',
+        png: 'image/png',
+        jpeg: 'image/jpeg',
+        gif: 'image/gif',
+        ico: 'image/x-icon',
+        css: 'text/css',
+        js: 'text/js',
+        html: 'text/html',
+    }
+    static fileTypes = Object.keys(this.types)
     /** @type {Route[]} */
     #routes: Route[] = []
     basename?: string
@@ -47,7 +57,7 @@ export default class Routes {
             }
         }
     }
-    
+
     getRoute(url: URL, method: Method) {
         const { pathname, } = url
         const route = this.#routes.find(route => {
@@ -69,18 +79,5 @@ export default class Routes {
     }
 
     static getTypeFile = (filePath: string) => Routes.fileTypes.find(type => filePath.endsWith(type))
-    static getMimeType = (type: string) => {
-        const types: Record<string, string> = {
-            svg: 'image/svg+xml',
-            png: 'image/png',
-            jpeg: 'image/jpeg',
-            gif: 'image/gif',
-            ico: 'image/x-icon',
-            css: 'text/css',
-            js: 'text/js',
-            html: 'text/html',
-        }
-
-        return types[type]
-    }
+    static getMimeType = (type: string) => Routes.types[type]
 }
