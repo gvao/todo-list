@@ -18,4 +18,9 @@
     p {
         opacity: .7;
     }
+
+    .main-header__logo {
+        width: 50%;
+        margin: 20px 0;
+    }
 }

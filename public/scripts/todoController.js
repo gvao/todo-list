@@ -46,13 +46,18 @@ class TodoController {
     render = (todoList) => {
         for (let area of this.areas) {
             const list = area.querySelector('ul')
-            list.innerHTML = ''
+            const countElement = area.querySelector('.todo-list__quantity')
             const statusList = list.dataset.status
+            let count = 0
+            list.innerHTML = ''
             todoList.forEach((todo) => {
                 const li = this.createTodoElement(todo)
-                if (String(todo.isDone) !== statusList) return
+                const isValid = String(todo.isDone) === statusList
+                if (!isValid) return
+                count++
                 list.appendChild(li)
             })
+            countElement.textContent = count
         }
     }
 

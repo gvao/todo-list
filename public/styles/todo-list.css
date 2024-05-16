@@ -11,10 +11,23 @@
         label {
             font-size: 24px;
             width: 100;
+            position: relative;
 
             input[type="checkbox"] {
                 display: none;
             };
+
+            .todo-list__quantity {
+                background-color: red;
+                aspect-ratio: 1;
+                font-size: 12px;
+                position: absolute;
+                top: -50%;
+                left: -10%;
+                border-radius: 50%;
+                width: 18px;
+                text-align: center;
+            }
         };
 
         ul {
@@ -34,6 +47,11 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                gap: 16px;
+
+                .todo-content {
+                    flex-grow: 1;
+                }
             }
         }
     }
