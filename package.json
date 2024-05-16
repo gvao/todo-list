@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch --trace-warnings ./dist/index.js",
-    "test": "node --test ./",
+    "test": "vitest",
     "test:dev": "reset && node --watch --test ./",
-    "test:debug": "node --inspect --watch --trace-warnings --test ./",
+    "test:debug": "vitest",
     "build:dev": "npx tsc --watch ",
     "build": "npx tsc",
     "start": "node ."
