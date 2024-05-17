@@ -1,4 +1,4 @@
-import Todo from "../../domain/Todo";
+import Todo from "../../domain/entity/Todo";
 import { TodoDto } from "../../domain/types";
 import Repository from "../Repository.interface";
 

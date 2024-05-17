@@ -1,4 +1,4 @@
-import Todo from "../../domain/Todo";
+import Todo from "../../domain/entity/Todo";
 import Repository from "../Repository.interface";
 
 export default class RemoveTodo {

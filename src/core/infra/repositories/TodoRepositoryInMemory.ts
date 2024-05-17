@@ -1,5 +1,5 @@
 import Repository from '../../application/Repository.interface'
-import Todo from "../../domain/Todo";
+import Todo from "../../domain/entity/Todo";
 
 export default class TodoRepositoryInMemory implements Repository<Todo> {
     #todos: Todo[] = []
