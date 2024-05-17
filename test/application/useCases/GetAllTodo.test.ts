@@ -1,6 +1,6 @@
-import GetAllTodo from "../../../src/core/application/useCases/GetAllTodo.js";
-import Todo from "../../../src/core/domain/Todo.js";
-import TodoRepositoryInMemory from "../../../src/core/infra/repositories/TodoRepositoryInMemory.js";
+import GetAllTodo from "../../../src/core/application/useCases/GetAllTodo";
+import Todo from "../../../src/core/domain/Todo";
+import TodoRepositoryInMemory from "../../../src/core/infra/repositories/TodoRepositoryInMemory";
 import { describe, expect, it } from 'vitest';
 
 describe('GetAllTodo', () => {

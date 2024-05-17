@@ -1,5 +1,5 @@
-import UpdateTodoStatus from "../../application/useCases/UpdateTodoStatus.js"
-import Route from "../../infra/Route.js"
+import UpdateTodoStatus from "../../application/useCases/UpdateTodoStatus"
+import Route from "../../infra/Route"
 
 export default class UpdateTodoStatusController {
     updateTodoStatus

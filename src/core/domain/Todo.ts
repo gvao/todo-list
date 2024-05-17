@@ -1,5 +1,5 @@
-import { newId } from "../utils/newId.js"
-import { TodoDto } from "./types.js";
+import { newId } from "../utils/newId"
+import { TodoDto } from "./types";
 
 export default class Todo {
     #id

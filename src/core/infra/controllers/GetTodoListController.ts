@@ -1,6 +1,5 @@
 import GetAllTodo from "../../application/useCases/GetAllTodo"
-import Route from "../Route.js"
-import { Middleware } from "../types"
+import Route from "../Route"
 
 export default class GetTodoListController {
     getAllTodo

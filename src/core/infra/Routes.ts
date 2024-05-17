@@ -1,6 +1,6 @@
 import path from 'node:path'
 import fs from 'node:fs/promises'
-import Route from './Route.js'
+import Route from './Route'
 import { Method } from './types'
 
 export default class Routes {

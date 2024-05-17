@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "![Todo List](/project-apresentation.png)",
   "main": "dist/index.js",
-  "type": "module",
   "scripts": {
     "dev": "node --watch --trace-warnings ./dist/index.js",
     "test": "vitest",

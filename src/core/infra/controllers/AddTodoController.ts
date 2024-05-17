@@ -1,5 +1,5 @@
-import AddTodo from "../../application/useCases/AddTodo.js"
-import Route from "../../infra/Route.js"
+import AddTodo from "../../application/useCases/AddTodo"
+import Route from "../../infra/Route"
 
 export default class AddTodoController {
     addTodo

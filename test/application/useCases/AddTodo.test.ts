@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
 import TodoRepositoryInMemory from "../../../src/core/infra/repositories/TodoRepositoryInMemory";
-import AddTodo from '../../../src/core/application/useCases/AddTodo.js'
+import AddTodo from '../../../src/core/application/useCases/AddTodo'
 import Repository from "../../../src/core/application/Repository.interface";
 import Todo from "../../../src/core/domain/Todo";
 

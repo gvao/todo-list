@@ -1,5 +1,5 @@
 import Todo from "../../domain/Todo";
-import { GetByIdRepository, SaveRepository } from "../Repository.interface.js";
+import { GetByIdRepository, SaveRepository } from "../Repository.interface";
 
 export default class UpdateTodoStatus {
     todoRepository

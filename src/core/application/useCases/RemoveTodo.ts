@@ -1,5 +1,5 @@
-import Todo from "../../domain/Todo.js";
-import Repository from "../Repository.interface.js";
+import Todo from "../../domain/Todo";
+import Repository from "../Repository.interface";
 
 export default class RemoveTodo {
     todoRepository
