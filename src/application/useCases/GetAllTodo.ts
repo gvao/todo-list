@@ -7,8 +7,8 @@ export default class GetAllTodo {
     constructor(todoRepository: Repository<Todo>) {
         this.todoRepository = todoRepository;
     }
-    execute(): TodoDto[] {
-        const todos = this.todoRepository.getAll()
+    async execute(): Promise<TodoDto[]> {
+        const todos = await this.todoRepository.getAll()
         const dtos = todos.map(todo => todo.dto)
         return dtos
     }

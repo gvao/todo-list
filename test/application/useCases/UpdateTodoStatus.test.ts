@@ -1,6 +1,6 @@
 import UpdateTodoStatus from '../../../src/core/application/useCases/UpdateTodoStatus'
 import TodoRepositoryInMemory from '../../../src/core/infra/repositories/TodoRepositoryInMemory'
-import Todo from '../../../src/core/domain/Todo'
+import Todo from '../../../src/core/domain/entity/Todo'
 import { beforeAll, describe, expect, it } from 'vitest'
 import { GetByIdRepository, SaveRepository } from '../../../src/core/application/Repository.interface'
 

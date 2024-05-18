@@ -10,7 +10,7 @@ export default class RemoveTodoController {
     controller() {
         return new Route('DELETE', '/api/todos/:id', async (req, res) => {
             const { params } = req
-            this.removeTodo.execute(params.id)
+            await this.removeTodo.execute(params.id)
             res.statusCode = 201
             res.end()
         })

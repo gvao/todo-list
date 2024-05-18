@@ -7,8 +7,8 @@ export default class AddTodo {
         this.todoRepository = todoRepository
     }
 
-    execute(title: string): void {
+    async execute(title: string): Promise<void> {
         const todo = Todo.create(title)
-        this.todoRepository.save(todo)
+        await this.todoRepository.save(todo)
     }
 }

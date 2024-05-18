@@ -6,7 +6,7 @@ export default class RemoveTodo {
     constructor(todoRepository: Repository<Todo>) {
         this.todoRepository = todoRepository;
     }
-    execute(id: string){
-        this.todoRepository.deleteById(id)
+    async execute(id: string){
+        await this.todoRepository.deleteById(id)
     }
 }

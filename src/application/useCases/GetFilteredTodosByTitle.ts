@@ -6,8 +6,8 @@ export default class GetFilteredTodosByTitle {
     constructor(todoRepository: Repository<Todo>) {
         this.#todoRepository = todoRepository;
     }
-    execute(search: string) {
-        const todos = this.#todoRepository.getAll()
+    async execute(search: string) {
+        const todos = await this.#todoRepository.getAll()
         if (!search) return todos
         const searchToLowerCase = search.toLowerCase()
         return todos.filter(({ title }) =>

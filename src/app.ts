@@ -1,18 +1,18 @@
 import { join } from 'node:path';
 
-import Routes from "./core/infra/Routes";
-import Server from './core/infra/Server';
+import Routes from "./infra/Routes";
+import Server from './infra/Server';
 
-import TodoRepositoryInMemory from "./core/infra/repositories/TodoRepositoryInMemory";
-import AddTodo from "./core/application/useCases/AddTodo";
-import GetAllTodo from "./core/application/useCases/GetAllTodo";
-import RemoveTodo from './core/application/useCases/RemoveTodo';
-import UpdateTodoStatus from './core/application/useCases/UpdateTodoStatus';
+import TodoRepositoryInMemory from "./infra/repositories/TodoRepositoryInMemory";
+import AddTodo from "./application/useCases/AddTodo";
+import GetAllTodo from "./application/useCases/GetAllTodo";
+import RemoveTodo from './application/useCases/RemoveTodo';
+import UpdateTodoStatus from './application/useCases/UpdateTodoStatus';
 
-import GetTodoListController from './core/infra/controllers/GetTodoListController';
-import AddTodoController from './core/infra/controllers/AddTodoController';
-import RemoveTodoController from './core/infra/controllers/RemoveTodo';
-import UpdateTodoStatusController from './core/infra/controllers/UpdateTodoStatus';
+import GetTodoListController from './infra/controllers/GetTodoListController';
+import AddTodoController from './infra/controllers/AddTodoController';
+import RemoveTodoController from './infra/controllers/RemoveTodo';
+import UpdateTodoStatusController from './infra/controllers/UpdateTodoStatus';
 
 const todoRepository = new TodoRepositoryInMemory()
 

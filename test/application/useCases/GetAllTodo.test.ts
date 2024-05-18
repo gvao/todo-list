@@ -1,5 +1,5 @@
 import GetAllTodo from "../../../src/core/application/useCases/GetAllTodo";
-import Todo from "../../../src/core/domain/Todo";
+import Todo from "../../../src/core/domain/entity/Todo";
 import TodoRepositoryInMemory from "../../../src/core/infra/repositories/TodoRepositoryInMemory";
 import { describe, expect, it } from 'vitest';
 

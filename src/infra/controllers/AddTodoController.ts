@@ -1,5 +1,5 @@
 import AddTodo from "../../application/useCases/AddTodo"
-import Route from "../../infra/Route"
+import Route from "../Route"
 
 export default class AddTodoController {
     addTodo
@@ -8,9 +8,9 @@ export default class AddTodoController {
     }
 
     controller() {
-        return new Route('POST', '/api/todos', (req, res) => {
+        return new Route('POST', '/api/todos', async (req, res) => {
             const body = req.body
-            this.addTodo.execute(body.title)
+            await this.addTodo.execute(body.title)
             res.writeHead(201, { "Content-Type": "application/json" })
             res.end(JSON.stringify({ message: `Todo created!` }))
         })
