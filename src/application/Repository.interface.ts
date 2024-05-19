@@ -9,6 +9,9 @@ export interface GetAllRepository<T> {
 export interface GetByIdRepository<T> {
     getById(id: string): Promise<T | undefined>
 }
+export interface GetByUsernameRepository<T> {
+    getByUsername(username: string): Promise<T | undefined>
+}
 
 export interface DeleteByIdRepository<T> {
     deleteById(id: string): Promise<void>
