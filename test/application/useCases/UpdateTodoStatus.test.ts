@@ -16,9 +16,9 @@ describe('ChangeStatusTodo', function () {
         repository.save(fakeTodo)
         updateTodoStatus = new UpdateTodoStatus(repository)
     })
-    it('change todo status', () => {
+    it('change todo status', async () => {
         updateTodoStatus.execute(fakeTodo.id, true)
-        const todo = repository.getById(fakeTodo.id)
+        const todo = await repository.getById(fakeTodo.id)
         expect(todo!.isDone).toBeTruthy()
     })
 })

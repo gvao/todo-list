@@ -15,9 +15,9 @@ describe('AddTodo', () => {
     })
 
     it('add new Todo', async () => {
-        addTodo.execute('any_title')
+        await addTodo.execute('any_title')
         expect(await repository.getAll()).toHaveLength(1)
-        addTodo.execute('any_title')
+        await addTodo.execute('any_title')
         expect(await repository.getAll()).toHaveLength(2)
     })
 })

@@ -4,12 +4,12 @@ import TodoRepositoryInMemory from "../../../src/infra/repositories/TodoReposito
 import { describe, expect, it } from 'vitest';
 
 describe('GetAllTodo', () => {
-    it('should return todos', () => {
+    it('should return todos', async () => {
         const repository = new TodoRepositoryInMemory()
         const getAllTodo = new GetAllTodo(repository)
         const todo = Todo.create('any_title')
-        repository.save(todo)
-        const todoList = getAllTodo.execute()
+        await repository.save(todo)
+        const todoList = await getAllTodo.execute()
         expect(todoList).toHaveLength(1)
     })
 })

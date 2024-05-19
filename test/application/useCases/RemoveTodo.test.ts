@@ -4,13 +4,13 @@ import TodoRepositoryInMemory from "../../../src/infra/repositories/TodoReposito
 import RemoveTodo from "../../../src/application/useCases/RemoveTodo";
 
 describe('RemoveTodo', () => {
-    it('should return todos', () => {
+    it('should return todos',async () => {
         const repository = new TodoRepositoryInMemory()
         const removeTodo = new RemoveTodo(repository)
         const todo = Todo.create('any_title')
-        repository.save(todo)
-        expect(repository.getAll()).toHaveLength(1)
-        removeTodo.execute(todo.id)
-        expect(repository.getAll()).toHaveLength(0)
+        await repository.save(todo)
+        expect(await repository.getAll()).toHaveLength(1)
+        await removeTodo.execute(todo.id)
+        expect(await repository.getAll()).toHaveLength(0)
     })
 })
