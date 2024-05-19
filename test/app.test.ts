@@ -1,6 +1,6 @@
 // import { Server } from 'node:http'
 import { afterAll, beforeAll, describe, it, expect } from 'vitest'
-import Todo from '../src/core/domain/Todo'
+import Todo from '../src/domain/Todo'
 
 describe('app', () => {
 

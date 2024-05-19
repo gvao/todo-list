@@ -1,8 +1,8 @@
-import UpdateTodoStatus from '../../../src/core/application/useCases/UpdateTodoStatus'
-import TodoRepositoryInMemory from '../../../src/core/infra/repositories/TodoRepositoryInMemory'
-import Todo from '../../../src/core/domain/entity/Todo'
+import UpdateTodoStatus from '../../../src/application/useCases/UpdateTodoStatus'
+import TodoRepositoryInMemory from '../../../src/infra/repositories/TodoRepositoryInMemory'
+import Todo from '../../../src/domain/entity/Todo'
 import { beforeAll, describe, expect, it } from 'vitest'
-import { GetByIdRepository, SaveRepository } from '../../../src/core/application/Repository.interface'
+import { GetByIdRepository, SaveRepository } from '../../../src/application/Repository.interface'
 
 describe('ChangeStatusTodo', function () {
     let fakeTodo: Todo
