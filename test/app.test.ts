@@ -1,6 +1,6 @@
 // import { Server } from 'node:http'
 import { afterAll, beforeAll, describe, it, expect } from 'vitest'
-import Todo from '../src/domain/Todo'
+import Todo from '../src/domain/entity/Todo'
 
 describe('app', () => {
 
@@ -83,9 +83,9 @@ describe('app', () => {
         expect(result.status).toBe(201)
 
         const response = await fetch(`${URL_BASE}/api/todos`)
-        const todos = await response.json()
+        const todos = (await response.json()) as Todo[]
         const todo = todos.find(todo => todo.id === firstTodo.id)
-        expect(todo.isDone).toBeTruthy()
+        expect(todo!.isDone).toBeTruthy()
 
     })
 
@@ -100,6 +100,19 @@ describe('app', () => {
         const todoList = await responseGet.json()
         expect(todoList).toHaveLength(0)
 
+    })
+
+    describe.only('User', () => {
+        it('should create a new user', async () => {
+            const url = `${URL_BASE}/api/signup`
+            const result = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({ username: 'john Doe', password: 'any_password' }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            expect(result.status).toBe(201)
+        })
+        
     })
 
     afterAll(done => _server.close(() => console.log(`close server!`)))
