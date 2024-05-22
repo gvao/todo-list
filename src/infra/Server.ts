@@ -2,6 +2,7 @@ import http from 'node:http'
 import Routes from "./Routes"
 import Route from './Route'
 import { Method, Middleware, Request, Response } from './types'
+import ServerStatus from '../domain/ServerStatus'
 
 
 export default class Server {
@@ -30,6 +31,8 @@ export default class Server {
                 if (!!route) {
                     const params = route.getParameters(url.pathname)
                     req.params = params
+                    const serverResponse = new ServerStatus(res)
+                    res.status = serverResponse.sendResponse
                     return route.handler(req, res)
                 }
                 res.statusCode = 404
@@ -54,5 +57,4 @@ export default class Server {
             next!()
         })
     }
-
 }
