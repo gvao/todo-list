@@ -103,16 +103,28 @@ describe('app', () => {
     })
 
     describe.only('User', () => {
+        const userInput = { username: 'john Doe', password: 'any_password' }
         it('should create a new user', async () => {
             const url = `${URL_BASE}/api/signup`
             const result = await fetch(url, {
                 method: 'POST',
-                body: JSON.stringify({ username: 'john Doe', password: 'any_password' }),
+                body: JSON.stringify(userInput),
                 headers: { 'Content-Type': 'application/json' }
             })
             expect(result.status).toBe(201)
         })
-        
+        it('should return access token', async () => {
+            const url = `${URL_BASE}/api/login`
+            const result = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(userInput),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            const { token } = await result.json()
+            expect(result.status).toBe(200)
+            expect(token).toBe('eyJhbGciOiJIUzI1NiJ9.am9obiBEb2U.nZDyx3KAkZpF-CpiSrXCTQeLx33GM_k8tOIFpjB2u-8')
+        })
+
     })
 
     afterAll(done => _server.close(() => console.log(`close server!`)))
