@@ -4,13 +4,7 @@ export default class Route {
     method
     path
     handler
-
-    /**
-     * @param {'GET' | 'POST'} method 
-     * @param {string} path 
-     * @param {(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage> & {req: http.IncomingMessage;}) => Promise<void>} handler 
-     */
-    constructor(method: string, path: string, handler: Middleware) {
+    constructor(method: 'GET' | 'POST' | 'DELETE', path: string, handler: Middleware) {
         this.method = method
         this.path = path
         this.handler = handler
