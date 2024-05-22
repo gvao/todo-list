@@ -21,4 +21,12 @@ describe('User', () => {
             expect(result).toBeFalsy()
         })
     })
+
+    it('should return user dto', () => {
+        expect(user.dto).toEqual({
+            ...input,
+            id: user.id,
+            password: '64c7ba4cf3ca34448b5a0ac7ec5fb88de9c3695525f52f9fc5a6343a03a693083beb43fe5a7bbddc2e48289180210cdd66ab029a9d16e68a00d41dc64eef78a5'
+        })
+    })
 })

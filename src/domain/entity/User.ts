@@ -14,6 +14,14 @@ export default class User implements UserInterface {
         return this.password.validate(plainPassword)
     }
 
+    get dto() {
+        return {
+            username: this.username,
+            password: this.password.value,
+            id: this.id
+        }
+    }
+
     static create({ username, password: plainPassword }: UserCreateProps) {
         const id = crypto.randomUUID()
         const salt = 'salt'
