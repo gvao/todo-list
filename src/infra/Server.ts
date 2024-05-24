@@ -18,6 +18,8 @@ export default class Server {
     use = (middleware: Middleware) => { this.#middleware.push(middleware) }
     listen = (port: number | string, callback: () => void) => {
         const server = http.createServer((req: Request, res: Response) => {
+            const serverResponse = new ServerStatus(res)
+            res.status = serverResponse.sendResponse
             let i = 0
             const next = () => {
                 const middleware = this.#middleware[i++]
@@ -31,8 +33,6 @@ export default class Server {
                 if (!!route) {
                     const params = route.getParameters(url.pathname)
                     req.params = params
-                    const serverResponse = new ServerStatus(res)
-                    res.status = serverResponse.sendResponse
                     return route.handler(req, res)
                 }
                 res.statusCode = 404
