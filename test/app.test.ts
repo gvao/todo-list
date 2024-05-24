@@ -1,20 +1,18 @@
-// import { Server } from 'node:http'
 import { afterAll, beforeAll, describe, it, expect } from 'vitest'
+import { IncomingMessage, Server, ServerResponse } from 'http'
 import Todo from '../src/domain/entity/Todo'
 
 describe('app', () => {
 
     const PORT = 3333
-    /**@type {Server<typeof IncomingMessage, typeof ServerResponse>} */
-    let _server
-    /** @type {Todo[]} */
+    let _server: Server<typeof IncomingMessage, typeof ServerResponse>
     const fakeTodoList: Todo[] = []
     const URL_BASE = `http://localhost:${PORT}`
 
     beforeAll(async () => {
         const { app } = await (import('../src/app'))
         _server = app.listen(PORT, () => console.log('server start!'))
-        await new Promise(resolve => _server.on('listening', resolve))
+        await new Promise(resolve => _server!.on('listening', resolve))
     })
 
     it('should POST "/api/todos"', async () => {
@@ -102,8 +100,9 @@ describe('app', () => {
 
     })
 
-    describe.only('User', () => {
+    describe('User', () => {
         const userInput = { username: 'john Doe', password: 'any_password' }
+        let fakeToken: string
         it('should create a new user', async () => {
             const url = `${URL_BASE}/api/signup`
             const result = await fetch(url, {
@@ -121,11 +120,22 @@ describe('app', () => {
                 headers: { 'Content-Type': 'application/json' }
             })
             const { token } = await result.json()
+            fakeToken = token
             expect(result.status).toBe(200)
             expect(token).toBe('eyJhbGciOiJIUzI1NiJ9.am9obiBEb2U.nZDyx3KAkZpF-CpiSrXCTQeLx33GM_k8tOIFpjB2u-8')
+        })
+        it('should return user', async () => {
+            const url = `${URL_BASE}/api/user`
+            const result = await fetch(url, {
+                method: 'GET',
+                headers: { 'authorization': `Bearer ${fakeToken}` }
+            })
+            expect(result.status).toBe(200)
+            const { user } = await result.json()
+            expect(user.username).toBe('john Doe')
         })
 
     })
 
-    afterAll(done => _server.close(() => console.log(`close server!`)))
+    afterAll(done => { _server!.close(() => console.log(`closed test server`)) })
 })
