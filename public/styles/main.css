@@ -1,10 +1,4 @@
 .main {
-    margin: 40px auto;
-    padding: var(--pad-default);
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: calc(var(--pad-default) * 2);
 }
 

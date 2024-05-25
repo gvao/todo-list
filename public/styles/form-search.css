@@ -1,3 +1,4 @@
+
 .form-search {
     width: 100%;
 
@@ -5,37 +6,4 @@
     justify-content: space-between;
     align-items: center;
     gap: var(--pad-medium);
-
-    .form-search__search {
-        background-color: var(--color-secondary);
-        flex-grow: 1;
-        padding: var(--pad-medium) var(--pad-default);
-        border: none;
-        border-radius: var(--radius-default);
-        outline: none;
-        font-weight: bold;
-        letter-spacing: 1px;
-        box-shadow: inset var(--shadow-default);
-    }
-
-    .form-search__submit {
-        background-color: var(--color-five);
-    
-        padding: var(--pad-medium) var(--pad-default);
-    
-        border-radius: var(--radius-default);
-        border: none;
-    
-        text-transform: uppercase;
-        font-weight: bold;
-    
-        box-shadow: var(--shadow-default);
-    
-        transition: box-shadow .5s ease-out;
-
-        &:active {
-            box-shadow: inset var(--shadow-default);
-        }
-    }
-    
 }

@@ -1,5 +1,6 @@
 @import url('./variables.css');
 @import url('./reset.css');
+@import url('./basics/index.css');
 
 @import url('./main.css');
 @import url('./form-search.css');
@@ -8,8 +9,8 @@
 body {
     font-family: sans-serif, Helvetica, Arial;
     min-height: 100%;
-    max-width: var(--max-width);
-
+    width: 100%;
+    
     background-color: var(--color-primary);
     color: var(--bg-primary);
 }
