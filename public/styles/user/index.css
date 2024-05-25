@@ -1,0 +1,9 @@
+.form-login {
+    gap: var(--pad-medium);
+}
+
+.form-login__btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
