@@ -6,9 +6,12 @@ export default class LoginController {
     controller = () => new Route('POST', '/api/login', async (req, res) => {
         const { body } = req
         const { username, password } = body
-        const token = await this.login.execute({ username, password })
-        res.status!(200).json({ token })
-        // res.writeHead(200, { 'Content-Type': 'application/json'})
-        // res.end(JSON.stringify({ token }))
+        try {
+            const token = await this.login.execute({ username, password })
+            res.status!(200).json({ token })
+        } catch(err) {
+            const response = res.status!(400)
+            response.json({ message: `failed authentication` })
+        }
     })
 }

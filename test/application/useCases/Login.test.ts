@@ -14,9 +14,14 @@ describe('Login', () => {
         await userRepository.save(fakeUser)
     })
     
-    it('should return acess token', async () => {
+    it('should return access token', async () => {
         const expectedToken = 'eyJhbGciOiJIUzI1NiJ9.YW55X3VzZXJuYW1l.2LGxQDd1Jzf3A_aKv01GxcsoXySCODioasWfR53y82k'
         const token = await login.execute(input)
         expect(token).toBe(expectedToken)
+    })
+
+    it('should error when invalid parameter', async () => {
+        expect(() => login.execute({ username: 'invalid_username', password: 'invalid_password' }))
+            .rejects.toThrow('Authentication failed')
     })
 })
