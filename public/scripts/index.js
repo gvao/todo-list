@@ -1,3 +1,6 @@
+const authService = new AuthService()
+authService.checkAuth()
+
 const todoGateway = new TodoGateway()
 const todoController = new TodoController()
 
