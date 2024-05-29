@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" href="./styles/index.css">
 
-    <script src="./scripts/authentication.js"></script>
+    <script src="./scripts/service/authService.js"></script>
 
     <title>Minhas tarefas</title>
 </head>
@@ -24,15 +24,15 @@
     </header>
 
     <form id="form-search" class="form-search">
-        <input class="form-search__search" type="text" name="search" id="search" placeholder="Pesquise ou adicione"
+        <input class="input form-search__search" type="text" name="search" id="search" placeholder="Pesquise ou adicione"
             autofocus>
-        <button class="form-search__submit" type="submit">New</button>
+        <button class="button form-search__submit" type="submit">New</button>
     </form>
 
     <section id="todo-list" class="todo-list">
         <div class="todo-list__status-list">
             <label for="todo-list__header__do">
-                <input type="checkbox" name="todo-list__header__do" id="todo-list__header__do">
+                <input type="checkbox" name="todo-list__header__do" id="todo-list__header__do" >
                 <span>Fazer</span>
                 <i class="fa fa-chevron-circle-up"></i>
                 <span class="todo-list__quantity">0</span>
@@ -69,9 +69,10 @@
     </section>
 
     <script src="./scripts/types.js"></script>
-    <script src="./scripts/observer.js"></script>
+    <script src="./scripts/utils/fetcher.js"></script>
+    <script src="./scripts/utils/createElement.js"></script>
+    <script src="./scripts/utils/observer.js"></script>
     <script src="./scripts/todoGateway.js"></script>
-    <script src="./scripts/createElement.js"></script>
     <script src="./scripts/todoController.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
