@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -8,23 +8,33 @@
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/user/index.css">
 
+    <script src="../scripts/utils/fetcher.js"></script>
+    <script src="../scripts/service/authService.js"></script>
+    <script src="../scripts/infra/repository/userRepository.js"></script>
+    <script src="../scripts/user/controller.js"></script>
+
     <title>User | Login</title>
 </head>
 
 <body>
 
     <form class="container form-login">
-        <h1>Login</h1>
-        <input class="input form-login__username" type="text" name="username" id="username" placeholder="username">
-        <input class="input form-login__password" type="password" name="password" id="password" placeholder="password">
-        <input class="input form-login__password-confirm" type="password-confirm" name="password-confirm" id="password"
+        <h1 class="form-login__title">Login</h1>
+
+        <input class="input form-login__username" required autofocus type="text" name="username" id="username"
+            placeholder="username">
+        <input class="input form-login__password" required type="password" name="password" id="password"
             placeholder="password">
+        <input class="input form-login__password-confirm" type="password-confirm" name="password-confirm"
+            id="password-confirm" placeholder="confirm password">
 
         <div class="form-login__btns">
-            <button class="button" type="submit">Entrar</button>
             <button class="button" type="submit">Cadastrar</button>
+            <button class="button" type="submit">Entrar</button>
         </div>
     </form>
+
+    <script src="../scripts/user/index.js"></script>
 </body>
 
 </html>
