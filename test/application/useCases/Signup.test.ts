@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import Signup from '../../../src/application/useCases/Signup'
-import UserRepositoryInMemory from '../../../src/infra/repositories/UserRepositoryInMemory'
+import Signup from '../../../src/authContext/application/useCases/Signup'
+import UserRepositoryInMemory from '../../../src/authContext/infra/repositories/UserRepositoryInMemory'
 
 describe('Signup', () => {
     const input = { username: 'any_user', password: 'any_password' }

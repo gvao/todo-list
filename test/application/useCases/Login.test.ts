@@ -1,8 +1,8 @@
 import { beforeAll, describe, expect, it } from "vitest"
-import UserRepositoryInMemory from '../../../src/infra/repositories/UserRepositoryInMemory'
-import Login from '../../../src/application/useCases/Login'
-import TokenGenerate from "../../../src/domain/service/TokenGenerate"
-import User from "../../../src/domain/entity/User"
+import UserRepositoryInMemory from '../../../src/authContext/infra/repositories/UserRepositoryInMemory'
+import Login from '../../../src/authContext/application/useCases/Login'
+import TokenGenerate from "../../../src/authContext/domain/service/TokenGenerate"
+import User from "../../../src/authContext/domain/User"
 
 describe('Login', () => {
     const input = { username: 'any_username', password: 'any_password' }

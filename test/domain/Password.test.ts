@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import Password from "../../src/domain/Password";
+import Password from "../../src/authContext/domain/Password";
 
 describe('Password', () => {
     const expectedPassword = '210612d58ff2bf48c7fe97680a5d3ff534e07473705595291e56d6801d1655c7da907191ca8fcb6e0825d7bd47437aafa88c9c75cd491a8d537f17f5eedc047c'

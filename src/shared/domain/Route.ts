@@ -1,10 +1,10 @@
-import { Middleware } from '../infra/types'
+import { Method, Middleware } from '../infra/types'
 
 export default class Route {
     method
     path
     handler
-    constructor(method: 'GET' | 'POST' | 'DELETE', path: string, handler: Middleware) {
+    constructor(method: Method, path: string, handler: Middleware) {
         this.method = method
         this.path = path
         this.handler = handler

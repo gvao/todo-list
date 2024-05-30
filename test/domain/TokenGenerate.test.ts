@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import TokenGenerate from "../../src/domain/service/TokenGenerate"
+import TokenGenerate from "../../src/authContext/domain/service/TokenGenerate"
 
 describe('TokenGenerate', () => {
     it('shoul return token', () => {

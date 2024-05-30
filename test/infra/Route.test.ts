@@ -1,9 +1,11 @@
 import { strictEqual, throws, deepStrictEqual } from "node:assert/strict"
 import { describe, expect, it } from "vitest"
 
-import Route from '../../src/infra/Route'
+import Route from '../../src/shared/domain/Route'
+import { Method } from "../../src/shared/infra/types"
 
-function makeSut({ method = 'GET', path = '/api/:id' }) {
+function makeSut({ method = 'GET', path = '/api/:id' }: { method?: Method, path?: string }) {
+
     return new Route(method, path, (req, res) => { })
 }
 

@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
 
-import TodoRepositoryInMemory from "../../../src/infra/repositories/TodoRepositoryInMemory";
-import AddTodo from '../../../src/application/useCases/AddTodo'
-import Repository from "../../../src/application/Repository.interface";
-import Todo from "../../../src/domain/entity/Todo";
+import TodoRepositoryInMemory from "../../../src/todoContext/infra/repositories/TodoRepositoryInMemory";
+import AddTodo from '../../../src/todoContext/application/useCases/AddTodo'
+import Repository from "../../../src/shared/Repository.interface";
+import Todo from "../../../src/todoContext/domain/entity/Todo";
 
 describe('AddTodo', () => {
     let repository: Repository<Todo>

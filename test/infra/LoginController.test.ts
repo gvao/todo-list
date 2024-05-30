@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest"
-import LoginController from '../../src/infra/controllers/LoginController'
-import Login from "../../src/application/useCases/Login"
-import UserRepositoryInMemory from "../../src/infra/repositories/UserRepositoryInMemory"
-import TokenGenerate from "../../src/domain/service/TokenGenerate"
-import Route from "../../src/infra/Route"
+import LoginController from '../../src/authContext/infra/controllers/LoginController'
+import Login from "../../src/authContext/application/useCases/Login"
+import UserRepositoryInMemory from "../../src/authContext/infra/repositories/UserRepositoryInMemory"
+import TokenGenerate from "../../src/authContext/domain/service/TokenGenerate"
+import Route from "../../src/shared/domain/Route"
 
 describe('LoginController', () => {
     const userRepository = new UserRepositoryInMemory()

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import User from '../../src/domain/entity/User'
+import User from '../../src/authContext/domain/User'
 
 describe('User', () => {
     const input = {

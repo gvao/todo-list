@@ -1,4 +1,4 @@
-import Todo from "../../src/domain/entity/Todo";
+import Todo from "../../src/todoContext/domain/entity/Todo";
 import { describe, it, expect } from "vitest";
 
 describe('Todo', () => {

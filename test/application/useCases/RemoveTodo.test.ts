@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import Todo from "../../../src/domain/entity/Todo";
-import TodoRepositoryInMemory from "../../../src/infra/repositories/TodoRepositoryInMemory";
-import RemoveTodo from "../../../src/application/useCases/RemoveTodo";
+import Todo from "../../../src/todoContext/domain/entity/Todo";
+import TodoRepositoryInMemory from "../../../src/todoContext/infra/repositories/TodoRepositoryInMemory";
+import RemoveTodo from "../../../src/todoContext/application/useCases/RemoveTodo";
 
 describe('RemoveTodo', () => {
     it('should return todos',async () => {
