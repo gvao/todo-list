@@ -10,7 +10,8 @@ describe('ChangeStatusTodo', function () {
     let updateTodoStatus: UpdateTodoStatus
 
     beforeAll(() => {
-        fakeTodo = Todo.create('any_title')
+        const title = 'any_title'
+        fakeTodo = Todo.create({ title })
         expect(fakeTodo.isDone).toBeFalsy()
         repository = new TodoRepositoryInMemory()
         repository.save(fakeTodo)

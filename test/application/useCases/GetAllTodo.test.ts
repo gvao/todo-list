@@ -7,7 +7,8 @@ describe('GetAllTodo', () => {
     it('should return todos', async () => {
         const repository = new TodoRepositoryInMemory()
         const getAllTodo = new GetAllTodo(repository)
-        const todo = Todo.create('any_title')
+        const title = 'any_title'
+        const todo = Todo.create({ title })
         await repository.save(todo)
         const todoList = await getAllTodo.execute()
         expect(todoList).toHaveLength(1)
