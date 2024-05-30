@@ -1,26 +1,26 @@
 import { join } from 'node:path';
 
-import Routes from "./infra/Routes";
-import Server from './infra/Server';
+import Routes from "./shared/domain/Routes";
+import Server from './shared/infra/Server';
 
-import TodoRepositoryInMemory from "./infra/repositories/TodoRepositoryInMemory";
-import AddTodo from "./application/useCases/AddTodo";
-import GetAllTodo from "./application/useCases/GetAllTodo";
-import RemoveTodo from './application/useCases/RemoveTodo';
-import UpdateTodoStatus from './application/useCases/UpdateTodoStatus';
+import TodoRepositoryInMemory from "./todo/infra/repositories/TodoRepositoryInMemory";
+import AddTodo from "./todo/application/useCases/AddTodo";
+import GetAllTodo from "./todo/application/useCases/GetAllTodo";
+import RemoveTodo from './todo/application/useCases/RemoveTodo';
+import UpdateTodoStatus from './todo/application/useCases/UpdateTodoStatus';
 
-import GetTodoListController from './infra/controllers/GetTodoListController';
-import AddTodoController from './infra/controllers/AddTodoController';
-import RemoveTodoController from './infra/controllers/RemoveTodo';
-import UpdateTodoStatusController from './infra/controllers/UpdateTodoStatus';
-import Signup from './application/useCases/Signup';
-import UserRepositoryInMemory from './infra/repositories/UserRepositoryInMemory';
-import SigUpController from './infra/controllers/SigUpController';
-import Login from './application/useCases/Login';
-import TokenGenerate from './domain/service/TokenGenerate';
-import LoginController from './infra/controllers/LoginController';
-import GetUserByToken from './application/useCases/GetUserByToken';
-import GetUserByTokenController from './infra/controllers/GetUserByTokenController';
+import GetTodoListController from './todo/infra/controllers/GetTodoListController';
+import AddTodoController from './todo/infra/controllers/AddTodoController';
+import RemoveTodoController from './todo/infra/controllers/RemoveTodo';
+import UpdateTodoStatusController from './todo/infra/controllers/UpdateTodoStatus';
+import Signup from './authContext/application/useCases/Signup';
+import UserRepositoryInMemory from './authContext/infra/repositories/UserRepositoryInMemory';
+import SigUpController from './authContext/infra/controllers/SigUpController';
+import Login from './authContext/application/useCases/Login';
+import TokenGenerate from './authContext/domain/service/TokenGenerate';
+import LoginController from './authContext/infra/controllers/LoginController';
+import GetUserByToken from './authContext/application/useCases/GetUserByToken';
+import GetUserByTokenController from './authContext/infra/controllers/GetUserByTokenController';
 
 const todoRepository = new TodoRepositoryInMemory()
 const userRepository = new UserRepositoryInMemory()
