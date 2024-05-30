@@ -1,5 +1,5 @@
-import { GetByUsernameRepository, SaveRepository } from "../../../shared/Repository.interface"
 import User from "../../domain/User"
+import { IUserRepository } from "../../application/Repository.interface"
 
 export default class UserRepositoryInMemory implements IUserRepository {
     users: User[] = []
@@ -11,4 +11,3 @@ export default class UserRepositoryInMemory implements IUserRepository {
     }
 }
 
-type IUserRepository = SaveRepository<User> & GetByUsernameRepository<User>
