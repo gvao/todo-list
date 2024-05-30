@@ -1,4 +1,4 @@
-import { newId } from "../../../utils/newId"
+import crypto from 'crypto'
 import { TodoDto } from "../todoTypes";
 
 export default class Todo {
@@ -6,11 +6,6 @@ export default class Todo {
     #isDone
     #title
 
-    /**
-     * @param {string} title 
-     * @param {string} id 
-     * @param {boolean} isDone
-     */
     constructor(title: string, id: string, isDone: boolean) {
         if (!title) throw new Error('inserir um valor válido');
         this.#title = title
@@ -26,11 +21,8 @@ export default class Todo {
     done() { this.#isDone = true }
     undone() { this.#isDone = false }
 
-    /**
-     * @param {string} title 
-     */
     static create(title: string) {
-        const id = newId()
+        const id = crypto.randomUUID()
         const isDone = false
         const todo = new Todo(title, id, isDone)
         return todo
