@@ -3,16 +3,16 @@ import { join } from 'node:path';
 import Routes from "./shared/domain/Routes";
 import Server from './shared/infra/Server';
 
-import TodoRepositoryInMemory from "./todo/infra/repositories/TodoRepositoryInMemory";
-import AddTodo from "./todo/application/useCases/AddTodo";
-import GetAllTodo from "./todo/application/useCases/GetAllTodo";
-import RemoveTodo from './todo/application/useCases/RemoveTodo';
-import UpdateTodoStatus from './todo/application/useCases/UpdateTodoStatus';
+import TodoRepositoryInMemory from "./todoContext/infra/repositories/TodoRepositoryInMemory";
+import AddTodo from "./todoContext/application/useCases/AddTodo";
+import GetAllTodo from "./todoContext/application/useCases/GetAllTodo";
+import RemoveTodo from './todoContext/application/useCases/RemoveTodo';
+import UpdateTodoStatus from './todoContext/application/useCases/UpdateTodoStatus';
 
-import GetTodoListController from './todo/infra/controllers/GetTodoListController';
-import AddTodoController from './todo/infra/controllers/AddTodoController';
-import RemoveTodoController from './todo/infra/controllers/RemoveTodo';
-import UpdateTodoStatusController from './todo/infra/controllers/UpdateTodoStatus';
+import GetTodoListController from './todoContext/infra/controllers/GetTodoListController';
+import AddTodoController from './todoContext/infra/controllers/AddTodoController';
+import RemoveTodoController from './todoContext/infra/controllers/RemoveTodo';
+import UpdateTodoStatusController from './todoContext/infra/controllers/UpdateTodoStatus';
 import Signup from './authContext/application/useCases/Signup';
 import UserRepositoryInMemory from './authContext/infra/repositories/UserRepositoryInMemory';
 import SigUpController from './authContext/infra/controllers/SigUpController';

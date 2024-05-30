@@ -2,7 +2,7 @@ import http from 'node:http'
 import Routes from "../domain/Routes"
 import Route from '../domain/Route'
 import { Method, Middleware, Request, Response } from './types'
-import ServerStatus from '../../todo/domain/ServerStatus'
+import ServerStatus from '../../todoContext/domain/ServerStatus'
 
 
 export default class Server {
