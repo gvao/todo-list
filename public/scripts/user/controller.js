@@ -48,6 +48,7 @@ class UserController {
     }
     /** @private */
     changeLogin() {
+        this.username.focus()
         this.typeForm = "login"
         this.title.textContent = "Login"
         this.passwordConfirm.style.display = "none"
