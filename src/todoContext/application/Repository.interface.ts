@@ -1,5 +1,6 @@
 import { DeleteByIdRepository, GetAllRepository, GetByIdRepository, SaveRepository } from "../../shared/Repository.interface";
 import Todo from "../domain/entity/Todo";
+import UserTodo from "../domain/entity/UserTodo";
 
 export type TodoRepository =
     GetAllRepository<Todo> &
@@ -9,4 +10,8 @@ export type TodoRepository =
 
 export type GetTodoByUserId = {
     getTodoByUserId(userId: string): Promise<Todo[]>
+}
+
+export type GetUserTodoByIdRepository = {
+    getUserTodoByIdRepository(UserId: string): Promise<UserTodo[]>
 }
