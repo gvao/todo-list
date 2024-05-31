@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest'
 import UserRepositoryInMemory from "../../../src/authContext/infra/repositories/UserRepositoryInMemory"
-import GetTodoListById from '../../../src/shared/application/GetTodoListById'
+import GetTodoListById from '../../../src/todoContext/application/useCases/GetTodoListById'
 import TokenGenerate from '../../../src/authContext/domain/service/TokenGenerate'
 import User from '../../../src/authContext/domain/User'
 import UserTodoRepositoryInMemory from '../../../src/todoContext/infra/repositories/UserTodoRepositoryInMemory'
