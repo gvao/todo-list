@@ -1,9 +1,9 @@
 import Todo from "../../domain/entity/Todo";
-import Repository from "../../../shared/Repository.interface"
+import { GetAllRepository } from "../../../shared/Repository.interface"
 
 export default class GetFilteredTodosByTitle {
     #todoRepository
-    constructor(todoRepository: Repository<Todo>) {
+    constructor(todoRepository: GetAllRepository<Todo>) {
         this.#todoRepository = todoRepository;
     }
     async execute(search: string) {

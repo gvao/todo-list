@@ -1,9 +1,9 @@
 import Todo from "../../domain/entity/Todo";
-import Repository from "../../../shared/Repository.interface";
+import { DeleteByIdRepository } from "../Repository.interface";
 
 export default class RemoveTodo {
     todoRepository
-    constructor(todoRepository: Repository<Todo>) {
+    constructor(todoRepository: DeleteByIdRepository<Todo>) {
         this.todoRepository = todoRepository;
     }
     async execute(id: string){

@@ -1,4 +1,5 @@
 import User from "../domain/User";
+export * from "../../shared/Repository.interface"
 import { SaveRepository } from '../../shared/Repository.interface'
 
 export interface GetByUsernameRepository {

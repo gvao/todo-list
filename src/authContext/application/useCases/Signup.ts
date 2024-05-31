@@ -1,5 +1,5 @@
 import User from "../../domain/User"
-import { GetByUsernameRepository, SaveRepository } from "../../../shared/Repository.interface"
+import { GetByUsernameRepository, SaveRepository } from "../../../authContext/application/Repository.interface"
 
 export default class Signup {
 
@@ -13,7 +13,7 @@ export default class Signup {
     }
 }
 
-type UserRepository = SaveRepository<User> & GetByUsernameRepository<User>
+type UserRepository = SaveRepository<User> & GetByUsernameRepository
 
 type SignupInput = {
     username: string

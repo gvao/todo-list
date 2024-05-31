@@ -1,6 +1,6 @@
 import User from "../../domain/User";
 import TokenGenerate from "../../domain/service/TokenGenerate";
-import { GetByUsernameRepository } from "../../../shared/Repository.interface";
+import { GetByUsernameRepository } from "../../../authContext/application/Repository.interface";
 
 export default class Login {
     constructor(private userRepository: userRepository, private tokenGenerate: TokenGenerate) { }
@@ -19,4 +19,4 @@ type LoginInput = {
     password: string,
 }
 
-type userRepository = GetByUsernameRepository<User>
+type userRepository = GetByUsernameRepository

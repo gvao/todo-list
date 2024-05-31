@@ -1,6 +1,7 @@
-import { DeleteByIdRepository, GetAllRepository, GetByIdRepository, SaveRepository } from "../../shared/Repository.interface";
 import Todo from "../domain/entity/Todo";
 import UserTodo from "../domain/entity/UserTodo";
+import { DeleteByIdRepository, GetAllRepository, GetByIdRepository, SaveRepository } from "../../shared/Repository.interface";
+export * from "../../shared/Repository.interface"
 
 export type TodoRepository =
     GetAllRepository<Todo> &

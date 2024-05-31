@@ -1,9 +1,8 @@
-import User from "../../domain/User"
 import TokenGenerate from "../../domain/service/TokenGenerate"
-import { GetByUsernameRepository } from "../../../shared/Repository.interface"
+import { GetByUsernameRepository } from "../../../authContext/application/Repository.interface"
 
 export default class GetUserByToken {
-    constructor(readonly TokenGenerate: TokenGenerate, readonly userRepository: GetByUsernameRepository<User>) {
+    constructor(readonly TokenGenerate: TokenGenerate, readonly userRepository: GetByUsernameRepository) {
     }
     async execute(token: string): Promise<Output | null> {
         const username = this.TokenGenerate.verify(token) as string
