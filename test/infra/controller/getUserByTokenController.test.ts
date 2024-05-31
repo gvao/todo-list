@@ -1,10 +1,10 @@
 import { beforeAll, describe, expect, it } from "vitest"
-import { Request, Response, StatusInterface } from "../../src/shared/infra/types"
-import GetUserByTokenController from '../../src/authContext/infra/controllers/GetUserByTokenController'
-import TokenGenerate from "../../src/authContext/domain/service/TokenGenerate"
-import UserRepositoryInMemory from "../../src/authContext/infra/repositories/UserRepositoryInMemory"
-import User from "../../src/authContext/domain/User"
-import GetUserByToken from "../../src/authContext/application/useCases/GetUserByToken"
+import { Request, Response, StatusInterface } from "../../../src/shared/infra/types"
+import GetUserByTokenController from '../../../src/authContext/infra/controllers/GetUserByTokenController'
+import TokenGenerate from "../../../src/authContext/domain/service/TokenGenerate"
+import UserRepositoryInMemory from "../../../src/authContext/infra/repositories/UserRepositoryInMemory"
+import User from "../../../src/authContext/domain/User"
+import GetUserByToken from "../../../src/authContext/application/useCases/GetUserByToken"
 
 describe('GetUserByTokenController', () => {
     const tokenGenerate = new TokenGenerate('secret')

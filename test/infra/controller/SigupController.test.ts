@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import SigUpController from '../../src/authContext/infra/controllers/SigUpController'
-import Route from '../../src/shared/domain/Route'
-import Signup from '../../src/authContext/application/useCases/Signup'
-import UserRepositoryInMemory from '../../src/authContext/infra/repositories/UserRepositoryInMemory'
+import SigUpController from '../../../src/authContext/infra/controllers/SigUpController'
+import Route from '../../../src/shared/domain/Route'
+import Signup from '../../../src/authContext/application/useCases/Signup'
+import UserRepositoryInMemory from '../../../src/authContext/infra/repositories/UserRepositoryInMemory'
 
 describe('SigUpController', () => {
     const userRepository = new UserRepositoryInMemory()
