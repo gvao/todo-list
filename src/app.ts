@@ -15,7 +15,6 @@ import RemoveTodo from './todoContext/application/useCases/RemoveTodo';
 import UpdateTodoStatus from './todoContext/application/useCases/UpdateTodoStatus';
 import Signup from './authContext/application/useCases/Signup';
 import Login from './authContext/application/useCases/Login';
-import GetUserByToken from './authContext/application/useCases/GetUserByToken';
 import GetTodoListById from './todoContext/application/useCases/GetTodoListById';
 import CreateUserTodo from './todoContext/application/useCases/CreateUserTodo';
 
@@ -25,9 +24,11 @@ import RemoveTodoController from './todoContext/infra/controllers/RemoveTodo';
 import UpdateTodoStatusController from './todoContext/infra/controllers/UpdateTodoStatus';
 import SigUpController from './authContext/infra/controllers/SigUpController';
 import LoginController from './authContext/infra/controllers/LoginController';
-import GetUserByTokenController from './authContext/infra/controllers/GetUserByTokenController';
+import GetUserByUsernameController from './authContext/infra/controllers/GetUserByUsernameController';
 import GetTodoListByIdController from './todoContext/infra/controllers/GetTodoListByIdController';
 import CreateUserTodoController from './todoContext/infra/controllers/CreateUserTodoController';
+import PrivateRoute from './authContext/infra/decorators/PrivateRoute';
+import GetUserByUsername from './authContext/application/useCases/GetUserByUsername';
 
 const todoRepository = new TodoRepositoryInMemory()
 const userRepository = new UserRepositoryInMemory()
@@ -40,9 +41,11 @@ const removeTodo = new RemoveTodo(todoRepository)
 const updateTodoStatus = new UpdateTodoStatus(todoRepository)
 const signup = new Signup(userRepository)
 const login = new Login(userRepository, tokenGenerator)
-const getUserByToken = new GetUserByToken(tokenGenerator, userRepository)
+const getUserByUsername = new GetUserByUsername(userRepository,)
 const getTodoListById = new GetTodoListById(tokenGenerator, userRepository, userTodoRepository)
 const createUserTodo = new CreateUserTodo(userTodoRepository)
+
+const privateRoute = new PrivateRoute(tokenGenerator, userRepository)
 
 const addTodoController = new AddTodoController(addTodo)
 const getTodoListController = new GetTodoListController(getAllTodo)
@@ -50,7 +53,7 @@ const removeTodoController = new RemoveTodoController(removeTodo)
 const updateTodoStatusController = new UpdateTodoStatusController(updateTodoStatus)
 const signupController = new SigUpController(signup)
 const loginController = new LoginController(login)
-const getUserByTokenController = new GetUserByTokenController(getUserByToken)
+const getUserByTokenController = new GetUserByUsernameController(getUserByUsername)
 const getTodoListByIdController = new GetTodoListByIdController(getTodoListById)
 const createUserTodoController = new CreateUserTodoController(createUserTodo, tokenGenerator, userRepository)
 
@@ -68,7 +71,7 @@ app.addRoute(updateTodoStatusController.controller())
 app.addRoute(signupController.controller())
 app.addRoute(loginController.controller())
 app.addRoute(createUserTodoController.controller())
-app.addRoute(getUserByTokenController.controller())
+app.addRoute(privateRoute.controller(getUserByTokenController))
 app.addRoute(getTodoListByIdController.controller())
 
 export { app }
