@@ -14,6 +14,6 @@ export default class GetTodoListById {
         const username = this.tokenGenerate.verify(token) as string
         const user = await this.userRepository.getByUsername(username)
         if (!user) throw new Error(`user not found:`)
-        return await this.todoRepository.getUserTodoByIdRepository(user.id)
+        return await this.todoRepository.getUserTodoById(user.id)
     }
 }
