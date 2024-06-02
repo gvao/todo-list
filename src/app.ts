@@ -17,6 +17,7 @@ import Signup from './authContext/application/useCases/Signup';
 import Login from './authContext/application/useCases/Login';
 import GetUserByToken from './authContext/application/useCases/GetUserByToken';
 import GetTodoListById from './todoContext/application/useCases/GetTodoListById';
+import CreateUserTodo from './todoContext/application/useCases/CreateUserTodo';
 
 import GetTodoListController from './todoContext/infra/controllers/GetTodoListController';
 import AddTodoController from './todoContext/infra/controllers/AddTodoController';
@@ -26,6 +27,7 @@ import SigUpController from './authContext/infra/controllers/SigUpController';
 import LoginController from './authContext/infra/controllers/LoginController';
 import GetUserByTokenController from './authContext/infra/controllers/GetUserByTokenController';
 import GetTodoListByIdController from './todoContext/infra/controllers/GetTodoListByIdController';
+import CreateUserTodoController from './todoContext/infra/controllers/CreateUserTodoController';
 
 const todoRepository = new TodoRepositoryInMemory()
 const userRepository = new UserRepositoryInMemory()
@@ -40,6 +42,7 @@ const signup = new Signup(userRepository)
 const login = new Login(userRepository, tokenGenerator)
 const getUserByToken = new GetUserByToken(tokenGenerator, userRepository)
 const getTodoListById = new GetTodoListById(tokenGenerator, userRepository, userTodoRepository)
+const createUserTodo = new CreateUserTodo(userTodoRepository)
 
 const addTodoController = new AddTodoController(addTodo)
 const getTodoListController = new GetTodoListController(getAllTodo)
@@ -49,6 +52,7 @@ const signupController = new SigUpController(signup)
 const loginController = new LoginController(login)
 const getUserByTokenController = new GetUserByTokenController(getUserByToken)
 const getTodoListByIdController = new GetTodoListByIdController(getTodoListById)
+const createUserTodoController = new CreateUserTodoController(createUserTodo, tokenGenerator, userRepository)
 
 const routes = new Routes()
 const app = new Server(routes)
@@ -59,11 +63,11 @@ app.use(Server.jsonParse)
 app.staticPath(publicPath)
 
 app.addRoute(getTodoListController.controller())
-app.addRoute(addTodoController.controller())
 app.addRoute(removeTodoController.controller())
 app.addRoute(updateTodoStatusController.controller())
 app.addRoute(signupController.controller())
 app.addRoute(loginController.controller())
+app.addRoute(createUserTodoController.controller())
 app.addRoute(getUserByTokenController.controller())
 app.addRoute(getTodoListByIdController.controller())
 

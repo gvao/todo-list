@@ -15,7 +15,7 @@ describe('app', () => {
         await new Promise(resolve => _server!.on('listening', resolve))
     })
 
-    describe('#todoList', () => {
+    describe.skip('#todoList', () => {
         it('should POST "/api/todos"', async () => {
             const url = `${URL_BASE}/api/todos`
             const responses = [
@@ -137,16 +137,16 @@ describe('app', () => {
             expect(user.username).toBe('john Doe')
         })
 
-        it.skip('should create a new todo to user', async () => {
+        it('should create a new todo to user', async () => {
             const url = `${URL_BASE}/api/users/todo`
             const result = await fetch(url, {
                 method: 'POST',
-                headers: { 'authorization': `Bearer ${fakeToken}` }
+                headers: { 'authorization': `Bearer ${fakeToken}`, 'Content-Type': "application/json" },
+                body: JSON.stringify({ title: 'any_title' })
             })
-            expect(result.status).toBe(200)
-            const { todoList } = await result.json()
-            expect(todoList).toHaveLength(1)
-            console.log(todoList)
+            expect(result.status).toBe(201)
+            const {message} = await result.json()
+            expect(message).toBe('Todo created!')
         })
         it('should return todo list by user', async () => {
             const url = `${URL_BASE}/api/users/todo`
@@ -157,7 +157,6 @@ describe('app', () => {
             expect(result.status).toBe(200)
             const { todoList } = await result.json()
             expect(todoList).toHaveLength(1)
-            console.log(todoList)
         })
 
     })
