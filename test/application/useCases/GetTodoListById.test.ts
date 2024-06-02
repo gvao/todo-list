@@ -7,23 +7,19 @@ import UserTodoRepositoryInMemory from '../../../src/todoContext/infra/repositor
 import UserTodo from '../../../src/todoContext/domain/entity/UserTodo'
 
 describe('GetTodoListById', () => {
-    const tokenGenerate = new TokenGenerate('secret')
-    const userRepository = new UserRepositoryInMemory()
     const userTodoRepository = new UserTodoRepositoryInMemory()
-    const getTodoListById = new GetTodoListById( tokenGenerate, userRepository, userTodoRepository)
+    const getTodoListById = new GetTodoListById(userTodoRepository)
     const inputUser = { username: 'any_username', password: 'any_password'}
     const user = User.create(inputUser)
     beforeAll(async () => {
         const outerUser = User.create({...inputUser, username: 'any_outer_username',})
         const userTodo = UserTodo.create({ title: 'any_title', userId: user.id })
         const outerUserTodo = UserTodo.create({ title: 'any_title', userId: outerUser.id })
-        await userRepository.save(user)
         await userTodoRepository.save(userTodo)
         await userTodoRepository.save(outerUserTodo)
     })
     it('should return a list of tasks user by token', async () => {
-        const token = tokenGenerate.generate(user.username)
-        const todoList = await getTodoListById.execute(token)
+        const todoList = await getTodoListById.execute(user.id)
         expect(todoList).toHaveLength(1)
     })
 })

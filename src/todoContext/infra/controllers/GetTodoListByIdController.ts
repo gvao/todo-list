@@ -7,10 +7,9 @@ export default class GetTodoListByIdController implements Controller {
     constructor(readonly getTodoListById: GetTodoListById) { }
 
     controller = (): Route => new Route('GET', '/api/users/todo', async (req, res) => {
-        const { headers: { authorization } } = req
-        if (!authorization) throw new Error(`Invalid authorization`)
-        const token = getToken(authorization)
-        const todoList = await this.getTodoListById.execute(token)
+        const { body } = req
+        const { id: userId } = body
+        const todoList = await this.getTodoListById.execute(userId)
         res.status!(200).json({ todoList })
     })
 }
