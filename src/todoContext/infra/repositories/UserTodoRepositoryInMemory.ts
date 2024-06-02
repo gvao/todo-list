@@ -7,7 +7,7 @@ export default class UserTodoRepositoryInMemory implements Repository {
     async save(userTodo: UserTodo): Promise<void> {
         this.userTodoList.push(userTodo)
     }
-    async getUserTodoByIdRepository(userId: string): Promise<UserTodo[]> {
+    async getUserTodoById(userId: string): Promise<UserTodo[]> {
         return this.userTodoList.filter(todo => todo.userId === userId)
     }
 }

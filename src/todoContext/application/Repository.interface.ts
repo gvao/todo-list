@@ -14,5 +14,5 @@ export type GetTodoByUserId = {
 }
 
 export type GetUserTodoByIdRepository = {
-    getUserTodoByIdRepository(UserId: string): Promise<UserTodo[]>
+    getUserTodoById(UserId: string): Promise<UserTodo[]>
 }
