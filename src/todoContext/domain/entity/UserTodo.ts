@@ -21,4 +21,4 @@ type UserTodoProps = TodoProps & {
     createdAt: Date,
 }
 
-type UserTodoCreateProps = Pick<UserTodoProps, 'userId' | 'title'>
+export type UserTodoCreateProps = Pick<UserTodoProps, 'userId' | 'title'>
