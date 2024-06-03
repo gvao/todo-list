@@ -138,7 +138,7 @@ describe('app', () => {
         })
 
         it('should create a new todo to user', async () => {
-            const url = `${URL_BASE}/api/users/todo`
+            const url = `${URL_BASE}/api/user/todo`
             const result = await fetch(url, {
                 method: 'POST',
                 headers: { 'authorization': `Bearer ${fakeToken}`, 'Content-Type': "application/json" },
@@ -149,7 +149,7 @@ describe('app', () => {
             expect(message).toBe('Todo created!')
         })
         it('should return todo list by user', async () => {
-            const url = `${URL_BASE}/api/users/todo`
+            const url = `${URL_BASE}/api/user/todo`
             const result = await fetch(url, {
                 method: 'GET',
                 headers: { 'authorization': `Bearer ${fakeToken}` }

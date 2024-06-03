@@ -7,7 +7,7 @@ import Controller from "./interface";
 export default class CreateUserTodoController implements Controller {
     constructor(private createUserTodo: CreateUserTodo, private tokenGenerate: TokenGenerate, private userRepository: GetByUsernameRepository ) { }
     controller() {
-        return new Route('POST', '/api/users/todo', async (req, res) => {
+        return new Route('POST', '/api/user/todo', async (req, res) => {
             const {
                 method,
                 body: { title, id: userId },
