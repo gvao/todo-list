@@ -23,7 +23,7 @@ import LoginController from './authContext/infra/controllers/LoginController';
 import GetUserByUsernameController from './authContext/infra/controllers/GetUserByUsernameController';
 import GetTodoListByIdController from './todoContext/infra/controllers/GetTodoListByIdController';
 import CreateUserTodoController from './todoContext/infra/controllers/CreateUserTodoController';
-import PrivateRoute from './authContext/infra/decorators/PrivateRoute';
+import PrivateRoute from './shared/infra/decorators/PrivateRoute';
 import GetUserByUsername from './authContext/application/useCases/GetUserByUsername';
 
 const todoRepository = new TodoRepositoryInMemory()
