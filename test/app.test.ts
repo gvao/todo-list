@@ -133,7 +133,6 @@ describe('app', () => {
             expect(result).toBe('dsindd')
             
         })
-
         it('should create a new todo to user', async () => {
             const titles = ['any_title', 'outer_title']
             for (const title of titles) {
