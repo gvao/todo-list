@@ -6,30 +6,28 @@ import ServerStatus from '../../todoContext/domain/ServerStatus'
 
 
 export default class Server {
-    #routes: Routes
-    #middleware: Middleware[] = []
+    private middleware: Middleware[] = []
 
-    constructor(routes: Routes) {
-        this.#routes = routes
-    }
+    constructor(private routes: Routes) { }
 
-    addRoute = (route: Route) => { this.#routes.addRoute(route) }
-    staticPath = async (path: string) => { this.#routes.usePublic(path) }
-    use = (middleware: Middleware) => { this.#middleware.push(middleware) }
+    addRoute = (route: Route) => { this.routes.addRoute(route) }
+    staticPath = async (path: string) => { this.routes.usePublic(path) }
+    use = (middleware: Middleware) => { this.middleware.push(middleware) }
     listen = (port: number | string, callback: () => void) => {
         const server = http.createServer((req: Request, res: Response) => {
             const serverResponse = new ServerStatus(res)
             res.status = serverResponse.sendResponse
+
             let i = 0
             const next = () => {
-                const middleware = this.#middleware[i++]
+                const middleware = this.middleware[i++]
                 if (!!middleware) {
                     middleware(req, res, next)
                     return
                 }
 
                 const url = new URL(req.url!, `http://${req.headers.host}`);
-                const route = this.#routes.getRoute(url, req.method as Method)
+                const route = this.routes.getRoute(url, req.method as Method)
                 if (!!route) {
                     const params = route.getParameters(url.pathname)
                     req.params = params
