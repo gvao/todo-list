@@ -47,7 +47,7 @@ const signupController = new SigUpController(signup)
 const loginController = new LoginController(login)
 const getUserByUsernameController = new GetUserByUsernameController(getUserByUsername)
 const getTodoListByIdController = new GetTodoListByIdController(getTodoListById)
-const createUserTodoController = new CreateUserTodoController(createUserTodo, tokenGenerator, userRepository)
+const createUserTodoController = new CreateUserTodoController(createUserTodo)
 
 const routes = new Routes()
 const app = new Server(routes)
