@@ -15,6 +15,6 @@ export default class GetTodoListByIdController implements Controller {
         const todoList = await this.getTodoListById.execute(userId)
         const todoFiltered = todoList.filter(todo => !search ? true : todo.title.includes(search))
 
-        res.status!(200).json({ todoList: todoFiltered })
+        res.status!(200).json({ todoList: todoFiltered.map(todo => todo.dto)})
     })
 }
