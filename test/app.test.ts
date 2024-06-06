@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe, it, expect } from 'vitest'
+import { afterAll, beforeAll, describe, it, expect, beforeEach } from 'vitest'
 import { IncomingMessage, Server, ServerResponse } from 'http'
 import Todo from '../src/todoContext/domain/entity/Todo'
 
@@ -50,23 +50,6 @@ describe('app', () => {
                 const todoList = (await response.json()) as Todo[]
                 expect(todoList).toHaveLength(2)
                 fakeTodoList.push(...todoList)
-            })
-
-            it('#/api/todos?search={parameter} return todo list filtered ', async () => {
-                const url = `http://localhost:${PORT}/api/todos?search=outer`
-                const response = await fetch(url)
-                const todos = await response.json()
-                const todoExpected = todos.find(todo => todo.title.includes('outer'))
-
-                expect(todos).toHaveLength(1)
-                expect(todoExpected.title).toBe('outer_title')
-            })
-
-            it('#/api/todos?search={parameter} parameter not found ', async () => {
-                const url = `http://localhost:${PORT}/api/todos?search=not_found`
-                const response = await fetch(url)
-                const todos = await response.json()
-                expect(todos).toHaveLength(0)
             })
 
         })
@@ -136,27 +119,54 @@ describe('app', () => {
             const { user } = await result.json()
             expect(user.username).toBe('john Doe')
         })
-
         it('should create a new todo to user', async () => {
-            const url = `${URL_BASE}/api/users/todo`
-            const result = await fetch(url, {
-                method: 'POST',
-                headers: { 'authorization': `Bearer ${fakeToken}`, 'Content-Type': "application/json" },
-                body: JSON.stringify({ title: 'any_title' })
-            })
-            expect(result.status).toBe(201)
-            const {message} = await result.json()
-            expect(message).toBe('Todo created!')
+            const titles = ['any_title', 'outer_title']
+            for (const title of titles) {
+                const url = `${URL_BASE}/api/user/todo`
+                const result = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'authorization': `Bearer ${fakeToken}`, 'Content-Type': "application/json" },
+                    body: JSON.stringify({ title })
+                })
+                expect(result.status).toBe(201)
+                const { message } = await result.json()
+                expect(message).toBe('Todo created!')
+            }
         })
-        it('should return todo list by user', async () => {
-            const url = `${URL_BASE}/api/users/todo`
-            const result = await fetch(url, {
-                method: 'GET',
-                headers: { 'authorization': `Bearer ${fakeToken}` }
+        describe('#get todos', () => {
+            let options: RequestInit
+
+            beforeEach(() => {
+                options = {
+                    method: 'GET',
+                    headers: { 'authorization': `Bearer ${fakeToken}` }
+                }
             })
-            expect(result.status).toBe(200)
-            const { todoList } = await result.json()
-            expect(todoList).toHaveLength(1)
+
+            it('should return todo list by user', async () => {
+                const url = `${URL_BASE}/api/user/todo`
+                const result = await fetch(url, options)
+                expect(result.status).toBe(200)
+                const { todoList } = await result.json()
+                expect(todoList).toHaveLength(2)
+            })
+
+            it('#/api/todos?search={parameter} return todo list filtered ', async () => {
+                const url = `${URL_BASE}/api/user/todo?search=outer`
+                const response = await fetch(url, options)
+                const { todoList } = await response.json()
+                expect(todoList).toHaveLength(1)
+                const todoExpected = todoList.find(todo => todo.title.includes('outer'))
+                expect(todoExpected!.title).toBe('outer_title')
+            })
+
+            it('#/api/todos?search={parameter} parameter not found ', async () => {
+                const url = `http://localhost:${PORT}/api/user/todo?search=not_found`
+                const response = await fetch(url, options)
+                const { todoList } = await response.json()
+                expect(todoList).toHaveLength(0)
+            })
+
         })
 
     })
