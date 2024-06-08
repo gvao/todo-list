@@ -105,7 +105,7 @@ describe('app', () => {
     describe('User', () => {
         const userInput = { username: 'john Doe', password: 'any_password' }
         let fakeToken: string
-        it('should create a new user', async () => {
+        it.only('should create a new user', async () => {
             const url = `${URL_BASE}/api/signup`
             const result = await fetch(url, {
                 method: 'POST',
@@ -114,7 +114,7 @@ describe('app', () => {
             })
             expect(result.status).toBe(201)
         })
-        it('should return access token', async () => {
+        it.only('should return access token', async () => {
             const url = `${URL_BASE}/api/login`
             const result = await fetch(url, {
                 method: 'POST',
@@ -126,6 +126,7 @@ describe('app', () => {
             expect(result.status).toBe(200)
             expect(token).toBe('eyJhbGciOiJIUzI1NiJ9.am9obiBEb2U.nZDyx3KAkZpF-CpiSrXCTQeLx33GM_k8tOIFpjB2u-8')
         })
+
         it('should return user', async () => {
             const url = `${URL_BASE}/api/user`
             const result = await fetch(url, {
@@ -135,6 +136,19 @@ describe('app', () => {
             expect(result.status).toBe(200)
             const { user } = await result.json()
             expect(user.username).toBe('john Doe')
+        })
+
+        it.only('should return error with invalid token', async () => {
+            const url = `${URL_BASE}/api/user`
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: { 'authorization': `Bearer invalid_token` }
+            })
+            expect(response.status).toBe(404)
+            const result = await response.json()
+            console.log(result);
+            expect(result).toBe('dsindd')
+            
         })
 
         it('should create a new todo to user', async () => {
