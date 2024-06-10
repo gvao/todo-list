@@ -1,9 +1,10 @@
-import Route from "../../../shared/domain/Route";
+import Route from "../../domain/Route";
 import Controller from "../../../todoContext/infra/controllers/interface";
-import TokenGenerate from "../../domain/service/TokenGenerate";
-import { Middleware, Request, Response } from "../../../shared/infra/types";
-import { getToken } from "../../../shared/utils/getToken";
-import { GetByUsernameRepository } from "../../application/Repository.interface";
+import TokenGenerate from "../../../authContext/domain/service/TokenGenerate";
+import { Middleware, Request, Response } from "../types";
+import { getToken } from "../../utils/getToken";
+import { GetByUsernameRepository } from "../../../authContext/application/Repository.interface";
+import { AuthenticationFailedError } from "../errors/AuthenticationFailedError";
 
 export default class PrivateRoute implements Controller {
     constructor(private tokenGenerate: TokenGenerate, private userRepository: GetByUsernameRepository) { }
@@ -15,14 +16,11 @@ export default class PrivateRoute implements Controller {
             } = req
             if (!authorization) throw new Error(`Invalid authorization`)
             const token = getToken(authorization)
-            const username = this.tokenGenerate.verify(token) as string
-            const user = await this.userRepository.getByUsername(username)
-            if (!user) return null
+            const { error, payload } = this.tokenGenerate.verify(token)
+            if (error && !payload) return new AuthenticationFailedError(route.method, route.path)
+            const user = await this.userRepository.getByUsername(payload as string)
+            if (!user) return new AuthenticationFailedError(route.method, route.path)
             const { password, ...dto } = user.dto
-            if (!user) {
-                res.status!(404).json()
-                return
-            }
             req.body = { ...req.body, ...dto, }
             route.handler(req, res)
         }
