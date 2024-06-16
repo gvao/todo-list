@@ -16,7 +16,7 @@ import Login from './authContext/application/useCases/Login';
 import GetTodoListById from './todoContext/application/useCases/GetTodoListById';
 import CreateUserTodo from './todoContext/application/useCases/CreateUserTodo';
 
-import RemoveTodoController from './todoContext/infra/controllers/RemoveTodo';
+import RemoveTodoController from './todoContext/infra/controllers/RemoveTodoController';
 import UpdateTodoStatusController from './todoContext/infra/controllers/UpdateTodoStatus';
 import SigUpController from './authContext/infra/controllers/SigUpController';
 import LoginController from './authContext/infra/controllers/LoginController';
@@ -26,20 +26,19 @@ import CreateUserTodoController from './todoContext/infra/controllers/CreateUser
 import PrivateRoute from './shared/infra/decorators/PrivateRoute';
 import GetUserByUsername from './authContext/application/useCases/GetUserByUsername';
 
-const todoRepository = new TodoRepositoryInMemory()
 const userRepository = new UserRepositoryInMemory()
 const userTodoRepository = new UserTodoRepositoryInMemory()
-const tokenGenerator = new TokenGenerate('secret')
 
-const removeTodo = new RemoveTodo(todoRepository)
-const updateTodoStatus = new UpdateTodoStatus(userTodoRepository)
+const tokenGenerator = new TokenGenerate('secret')
+const privateRoute = new PrivateRoute(tokenGenerator, userRepository)
+
 const signup = new Signup(userRepository)
 const login = new Login(userRepository, tokenGenerator)
+const removeTodo = new RemoveTodo(userTodoRepository)
+const updateTodoStatus = new UpdateTodoStatus(userTodoRepository)
 const getUserByUsername = new GetUserByUsername(userRepository,)
 const getTodoListById = new GetTodoListById(userTodoRepository)
 const createUserTodo = new CreateUserTodo(userTodoRepository)
-
-const privateRoute = new PrivateRoute(tokenGenerator, userRepository)
 
 const removeTodoController = new RemoveTodoController(removeTodo)
 const updateTodoStatusController = new UpdateTodoStatusController(updateTodoStatus)
@@ -59,7 +58,7 @@ app.staticPath(publicPath)
 
 app.addRoute(signupController.controller())
 app.addRoute(loginController.controller())
-app.addRoute(removeTodoController.controller())
+app.addRoute(privateRoute.controller(removeTodoController))
 app.addRoute(privateRoute.controller(updateTodoStatusController))
 app.addRoute(privateRoute.controller(createUserTodoController))
 app.addRoute(privateRoute.controller(getUserByUsernameController))

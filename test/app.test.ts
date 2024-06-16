@@ -65,7 +65,7 @@ describe('app', () => {
 
         describe('#todo', () => {
             let options: RequestInit
-            const fakeTodoList: Todo[] = []
+            const fakeUserTodoList: Todo[] = []
 
             beforeEach(() => {
                 options = {
@@ -95,7 +95,7 @@ describe('app', () => {
                 expect(result.status).toBe(200)
                 const { todoList } = await result.json()
                 expect(todoList).toHaveLength(2)
-                fakeTodoList.push(...todoList)
+                fakeUserTodoList.push(...todoList)
             })
 
             it('#/api/todos?search={parameter} return todo list filtered ', async () => {
@@ -115,7 +115,7 @@ describe('app', () => {
             })
 
             it('POST "/api/user/todo/:id/changeStatus" update isDone property by Todo', async () => {
-                const [firstTodo] = fakeTodoList
+                const [firstTodo] = fakeUserTodoList
                 const url = `${URL_BASE}/api/user/todo/${firstTodo.id}/changeStatus`
                 const result = await fetch(url, {
                     ...options,
@@ -130,6 +130,19 @@ describe('app', () => {
                 const todo = todoList.find(todo => todo.id === firstTodo.id)
                 expect(todo!.isDone).toBeTruthy()
 
+            })
+
+            it('DELETE "/api/user/todo/:id"', async () => {
+                const optionsDelete = { ...options, method: "DELETE" }
+                for (const userTodo of fakeUserTodoList) {
+                    const url = `${URL_BASE}/api/user/todo/${userTodo.id}`
+                    const response = await fetch(url, optionsDelete)
+                    expect(response.status).toBe(201)
+                }
+                await new Promise(resolve => setTimeout(resolve, 3000))
+                const responseGet = await fetch(`${URL_BASE}/api/user/todo`, options)
+                const { todoList } = await responseGet.json()
+                expect(todoList).toHaveLength(0)
             })
 
         })
