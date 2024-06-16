@@ -1,16 +1,15 @@
 class AuthService {
-    /** @type {string | undefined} */
-    token
+    /** 
+     * @type {string | undefined} 
+     * @private
+    */
+    _token = null
 
-    checkAuth() {
-        const token = this.getToken()
-        if (!token) window.location.replace('/user/login.html')
+    constructor() {
+        this._token = this.getToken()
     }
 
-    /** @private */
-    getToken = () => this.token = JSON.parse(localStorage.getItem('user_token'))
-    /** @private */
-    setToken = token => localStorage.setItem('user_token', JSON.stringify(token))
+    checkAuth = () => this.getUser()
 
     /** @param {LoginInput} data  */
     async login({ username, password }) {
@@ -27,10 +26,26 @@ class AuthService {
         return result.status === 201 || result.status === 304
     }
 
-    logout(){
+    logout() {
         this.setToken('')
-        location.replace('/user/login.html')
+        this.loginRedirect()
     }
+
+    getUser = async () => {
+        const token = this.getToken()
+        if (!token) this.logout()
+        const response = await fetcher('/api/user', 'GET', null, { headers: { authorization: `Bearer ${token}` } })
+        if (!response.ok) this.logout()
+        const { user } = await response.json()
+        return { ...user, token: this.getToken() }
+    }
+
+    getToken = () => this._token = JSON.parse(localStorage.getItem('user_token'))
+    /** @private */
+    setToken = token => localStorage.setItem('user_token', JSON.stringify(token))
+    /** @private */
+    loginRedirect = () => { window.location.replace('/user/login.html') }
+
 }
 
 /**
