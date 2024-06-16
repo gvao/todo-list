@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe, it, expect, beforeEach } from 'vitest'
+import { afterAll, beforeAll, describe, it, expect, beforeEach, test } from 'vitest'
 import { IncomingMessage, Server, ServerResponse } from 'http'
 import Todo from '../src/todoContext/domain/entity/Todo'
 
@@ -88,7 +88,7 @@ describe('app', () => {
     describe('User', () => {
         const userInput = { username: 'john Doe', password: 'any_password' }
         let fakeToken: string
-        it.only('should create a new user', async () => {
+        it('should create a new user', async () => {
             const url = `${URL_BASE}/api/signup`
             const result = await fetch(url, {
                 method: 'POST',
@@ -97,7 +97,7 @@ describe('app', () => {
             })
             expect(result.status).toBe(201)
         })
-        it.only('should return access token', async () => {
+        it('should return access token', async () => {
             const url = `${URL_BASE}/api/login`
             const result = await fetch(url, {
                 method: 'POST',
@@ -119,33 +119,20 @@ describe('app', () => {
             expect(result.status).toBe(200)
             const { user } = await result.json()
             expect(user.username).toBe('john Doe')
-        })
-        it.only('should return error with invalid token', async () => {
+        });
+
+        it('should return error with invalid token', async () => {
             const url = `${URL_BASE}/api/user`
             const response = await fetch(url, {
                 method: 'GET',
                 headers: { 'authorization': `Bearer invalid_token` }
             })
             expect(response.status).toBe(404)
-            const result = await response.json()
-            console.log(result);
-            expect(result).toBe('dsindd')
-            
+            const { message } = await response.json()
+            expect(message).toBe('authentication failed')
         })
-        it('should create a new todo to user', async () => {
-            const titles = ['any_title', 'outer_title']
-            for (const title of titles) {
-                const url = `${URL_BASE}/api/user/todo`
-                const result = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'authorization': `Bearer ${fakeToken}`, 'Content-Type': "application/json" },
-                    body: JSON.stringify({ title })
-                })
-                expect(result.status).toBe(201)
-                const { message } = await result.json()
-                expect(message).toBe('Todo created!')
-            }
-        })
+
+
         describe('#get todos', () => {
             let options: RequestInit
 
@@ -153,6 +140,21 @@ describe('app', () => {
                 options = {
                     method: 'GET',
                     headers: { 'authorization': `Bearer ${fakeToken}` }
+                }
+            })
+
+            it('should create a new todo to user', async () => {
+                const titles = ['any_title', 'outer_title']
+                for (const title of titles) {
+                    const url = `${URL_BASE}/api/user/todo`
+                    const result = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'authorization': `Bearer ${fakeToken}`, 'Content-Type': "application/json" },
+                        body: JSON.stringify({ title })
+                    })
+                    expect(result.status).toBe(201)
+                    const { message } = await result.json()
+                    expect(message).toBe('Todo created!')
                 }
             })
 

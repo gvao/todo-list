@@ -10,16 +10,17 @@ export default class PrivateRoute implements Controller {
     constructor(private tokenGenerate: TokenGenerate, private userRepository: GetByUsernameRepository) { }
     controller(controller: Controller): Route {
         const route = controller.controller()
+        const errorRoute = new AuthenticationFailedError(route.method, route.path)
+        const execHandler = (req: Request, res: Response) => () => errorRoute.handler(req, res)
         const handler: Middleware = async (req: Request, res: Response) => {
-            const {
-                headers: { authorization },
-            } = req
-            if (!authorization) throw new Error(`Invalid authorization`)
+            const errorHandler = execHandler(req, res)
+            const { headers: { authorization }, } = req
+            if (!authorization) return errorHandler()
             const token = getToken(authorization)
             const { error, payload } = this.tokenGenerate.verify(token)
-            if (error && !payload) return new AuthenticationFailedError(route.method, route.path)
+            if (error && !payload) return errorHandler()
             const user = await this.userRepository.getByUsername(payload as string)
-            if (!user) return new AuthenticationFailedError(route.method, route.path)
+            if (!user) return errorHandler()
             const { password, ...dto } = user.dto
             req.body = { ...req.body, ...dto, }
             route.handler(req, res)
@@ -27,4 +28,6 @@ export default class PrivateRoute implements Controller {
 
         return new Route(route.method, route.path, handler)
     }
+
+    checkAuthorization = (authorization: string) => { }
 }
