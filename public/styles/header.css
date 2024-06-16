@@ -1,0 +1,23 @@
+.header {
+    max-width: 100%;
+    width: 100%;
+    padding: var(--pad-medium) var(--pad-default);
+    display: flex;
+    justify-content: space-between;
+
+    .header__logo {
+        flex-shrink: 2;
+        width: 16%;
+        background-color: var(--color-five);
+        padding: var(--pad-medium);
+        border-radius: var(--radius-default);
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .header__subtitle h2 {
+        margin: revert;
+    }
+}

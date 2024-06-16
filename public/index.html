@@ -25,57 +25,71 @@
     <title>Minhas tarefas</title>
 </head>
 
-<body class="container main">
-    <header class="main-header">
-        <img class="main-header__logo" src="./images/noteList.svg" alt="note list img">
-        <h1>Minhas tarefas</h1>
-        <p>Tenha suas atividades listadas e organizadas!</p>
+<body class="main">
+    <header class="header">
+        <a class="header__logo" href="/">
+            <img src="./images/noteList.svg" alt="note list img">
+        </a>
+
+        <div class="header__subtitle">
+            <h2>Minhas tarefas</h2>
+        </div>
+
+        <button class="button" id="button_logout">Sair</button>
     </header>
 
-    <form id="form-search" class="form-search">
-        <input class="input form-search__search" type="text" name="search" id="search"
-            placeholder="Pesquise ou adicione" autofocus>
-        <button class="button form-search__submit" type="submit">New</button>
-    </form>
+    <main class="container main">
+        <section class="hero">
+            <img class="hero__logo" src="./images/noteList.svg" alt="note list img">
+            <h1>Minhas tarefas</h1>
+            <p>Tenha suas atividades listadas e organizadas!</p>
+        </section>
 
-    <section id="todo-list" class="todo-list">
-        <div class="todo-list__status-list">
-            <label for="todo-list__header__do">
-                <input type="checkbox" name="todo-list__header__do" id="todo-list__header__do">
-                <span>Fazer</span>
-                <i class="fa fa-chevron-circle-up"></i>
-                <span class="todo-list__quantity">0</span>
-            </label>
-            <ul data-status=false>
-                <li class="todo-item" data-item="xbB11FlRjNyaKyXDQt11BNhAlK">
-                    <input class="todo-status" type="checkbox">
-                    <span class="todo-content">muscula</span>
-                    <i class="fa fa-trash" data-trash="xbB11FlRjNyaKyXDQt11BNhAlK"></i>
-                </li>
-                <li class="todo-item" data-item="xbB11FlRjNyaKyXDQt11BNhAlK">
-                    <input class="todo-status" type="checkbox">
-                    <span class="todo-content">muscula</span>
-                    <i class="fa fa-trash" data-trash="xbB11FlRjNyaKyXDQt11BNhAlK"></i>
-                </li>
-            </ul>
-        </div>
+        <form id="form-search" class="form-search">
+            <input class="input form-search__search" type="text" name="search" id="search"
+                placeholder="Pesquise ou adicione" autofocus>
+            <button class="button form-search__submit" type="submit">New</button>
+        </form>
 
-        <div class="todo-list__status-list">
-            <label for="todo-list__header__done">
-                <input type="checkbox" name="todo-list__header__done" id="todo-list__header__done">
-                <span>Feito</span>
-                <i class="fa fa-chevron-circle-down"></i>
-                <span class="todo-list__quantity">0</span>
-            </label>
-            <ul class="--hidden" data-status=true>
-                <li class="todo-item" data-item="xbB11FlRjNyaKyXDQt11BNhAlK">
-                    <input class="todo-status" type="checkbox">
-                    <span class="todo-content">muscula</span>
-                    <i class="fa fa-trash" data-trash="xbB11FlRjNyaKyXDQt11BNhAlK"></i>
-                </li>
-            </ul>
-        </div>
-    </section>
+        <section id="todo-list" class="todo-list">
+            <div class="todo-list__status-list">
+                <label for="todo-list__header__do">
+                    <input type="checkbox" name="todo-list__header__do" id="todo-list__header__do">
+                    <span>Fazer</span>
+                    <i class="fa fa-chevron-circle-up"></i>
+                    <span class="todo-list__quantity">0</span>
+                </label>
+                <ul data-status=false>
+                    <li class="todo-item" data-item="xbB11FlRjNyaKyXDQt11BNhAlK">
+                        <input class="todo-status" type="checkbox">
+                        <span class="todo-content">muscula</span>
+                        <i class="fa fa-trash" data-trash="xbB11FlRjNyaKyXDQt11BNhAlK"></i>
+                    </li>
+                    <li class="todo-item" data-item="xbB11FlRjNyaKyXDQt11BNhAlK">
+                        <input class="todo-status" type="checkbox">
+                        <span class="todo-content">muscula</span>
+                        <i class="fa fa-trash" data-trash="xbB11FlRjNyaKyXDQt11BNhAlK"></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="todo-list__status-list">
+                <label for="todo-list__header__done">
+                    <input type="checkbox" name="todo-list__header__done" id="todo-list__header__done">
+                    <span>Feito</span>
+                    <i class="fa fa-chevron-circle-down"></i>
+                    <span class="todo-list__quantity">0</span>
+                </label>
+                <ul class="--hidden" data-status=true>
+                    <li class="todo-item" data-item="xbB11FlRjNyaKyXDQt11BNhAlK">
+                        <input class="todo-status" type="checkbox">
+                        <span class="todo-content">muscula</span>
+                        <i class="fa fa-trash" data-trash="xbB11FlRjNyaKyXDQt11BNhAlK"></i>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
 
     <script src="./scripts/types.js"></script>
     <script src="./scripts/todoGateway.js"></script>

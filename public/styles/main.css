@@ -2,9 +2,9 @@
     gap: calc(var(--pad-default) * 2);
 }
 
-.main-header {
+.hero {
     width: 100%;
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +13,7 @@
         opacity: .7;
     }
 
-    .main-header__logo {
+    .hero__logo {
         width: 50%;
         margin: 20px 0;
     }
