@@ -11,7 +11,7 @@ export default class TokenGenerate {
         const errors: string[] = []
         try {
             const payload = verify(token, this.secretKey) as string
-            return { payload, error: errors.length > 0 && errors }
+            return { payload, error: errors }
         } catch (err: unknown) {
             const error = err as JsonWebTokenError
             errors.push(`invalid token: ${error.message}`)
