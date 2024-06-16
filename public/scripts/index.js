@@ -1,14 +1,15 @@
-const todoGateway = new TodoGateway()
+const authService = new AuthService()
+const todoGateway = new TodoGateway(authService)
 const todoController = new TodoController()
 
 async function updateTodoList(input) {
-    const todoList = await todoGateway.getAll(input)
+    const { todoList } = await todoGateway.getAll(input)
     todoController.render(todoList)
 }
 
 todoController.on(async (args) => {
     const { type, input, id, status } = args
-    
+
     if (type === 'search') {
         return updateTodoList(input)
     }
