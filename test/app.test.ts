@@ -6,7 +6,6 @@ describe('app', () => {
 
     const PORT = 3333
     let _server: Server<typeof IncomingMessage, typeof ServerResponse>
-    const fakeTodoList: Todo[] = []
     const URL_BASE = `http://localhost:${PORT}`
 
     beforeAll(async () => {
@@ -15,75 +14,6 @@ describe('app', () => {
         await new Promise(resolve => _server!.on('listening', resolve))
     })
 
-    describe.skip('#todoList', () => {
-        it('should POST "/api/todos"', async () => {
-            const url = `${URL_BASE}/api/todos`
-            const responses = [
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ title: 'any_title' })
-                }),
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ title: 'outer_title' })
-                })
-
-            ]
-            const [response] = await Promise.all(responses)
-
-            expect(response.status).toBe(201)
-            expect(response.ok).toBeTruthy()
-        })
-
-        describe('GET', function () {
-            it('#/api/todos return all todos ', async () => {
-                const url = `${URL_BASE}/api/todos`
-                const response = await fetch(url)
-                expect(response.ok).toBeTruthy()
-                expect(response.status).toBe(200)
-                const todoList = (await response.json()) as Todo[]
-                expect(todoList).toHaveLength(2)
-                fakeTodoList.push(...todoList)
-            })
-
-        })
-
-        it('POST "/api/todos/:id/changeStatus" update isDone property by Todo', async () => {
-            const [firstTodo] = fakeTodoList
-            const url = `${URL_BASE}/api/todos/${firstTodo.id}/changeStatus`
-            const result = await fetch(url, {
-                method: 'POST',
-                body: JSON.stringify({ status: true }),
-                headers: { 'Content-Type': 'application/json' }
-            })
-            expect(result.status).toBe(201)
-
-            const response = await fetch(`${URL_BASE}/api/todos`)
-            const todos = (await response.json()) as Todo[]
-            const todo = todos.find(todo => todo.id === firstTodo.id)
-            expect(todo!.isDone).toBeTruthy()
-
-        })
-
-        it('DELETE "/api/todos/:id"', async () => {
-            const [firstTodo, secondsTodo] = fakeTodoList
-            const url = `http://localhost:${PORT}/api/todos/${firstTodo.id}`
-            const responseFirst = await fetch(url, { method: "DELETE" })
-            const responseSecond = await fetch(`${URL_BASE}/api/todos/${secondsTodo.id}`, { method: "DELETE" })
-            expect(responseFirst.status).toBe(201)
-            expect(responseSecond.status).toBe(201)
-            const responseGet = await fetch(`${URL_BASE}/api/todos`)
-            const todoList = await responseGet.json()
-            expect(todoList).toHaveLength(0)
-
-        })
-    })
 
     describe('User', () => {
         const userInput = { username: 'john Doe', password: 'any_password' }
@@ -133,8 +63,9 @@ describe('app', () => {
         })
 
 
-        describe('#get todos', () => {
+        describe('#todo', () => {
             let options: RequestInit
+            const fakeTodoList: Todo[] = []
 
             beforeEach(() => {
                 options = {
@@ -164,6 +95,7 @@ describe('app', () => {
                 expect(result.status).toBe(200)
                 const { todoList } = await result.json()
                 expect(todoList).toHaveLength(2)
+                fakeTodoList.push(...todoList)
             })
 
             it('#/api/todos?search={parameter} return todo list filtered ', async () => {
@@ -180,6 +112,24 @@ describe('app', () => {
                 const response = await fetch(url, options)
                 const { todoList } = await response.json()
                 expect(todoList).toHaveLength(0)
+            })
+
+            it('POST "/api/user/todo/:id/changeStatus" update isDone property by Todo', async () => {
+                const [firstTodo] = fakeTodoList
+                const url = `${URL_BASE}/api/user/todo/${firstTodo.id}/changeStatus`
+                const result = await fetch(url, {
+                    ...options,
+                    method: 'POST',
+                    body: JSON.stringify({ status: true }),
+                    headers: { 'Content-Type': 'application/json', ...options.headers }
+                })
+                expect(result.status).toBe(201)
+
+                const response = await fetch(`${URL_BASE}/api/user/todo`, options)
+                const { todoList } = (await response.json())
+                const todo = todoList.find(todo => todo.id === firstTodo.id)
+                expect(todo!.isDone).toBeTruthy()
+
             })
 
         })

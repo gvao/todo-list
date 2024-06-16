@@ -8,7 +8,7 @@ export default class UpdateTodoStatusController {
     }
 
     controller() {
-        return new Route('POST', '/api/todos/:id/changeStatus', async (req, res) => {
+        return new Route('POST', '/api/user/todo/:id/changeStatus', async (req, res) => {
             const { id } = req.params
             const { status } = req.body
             await this.updateTodoStatus.execute(id, status)
