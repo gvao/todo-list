@@ -1,7 +1,6 @@
-import { sign, verify } from 'jsonwebtoken'
+import { JsonWebTokenError, JwtPayload, sign, verify, } from 'jsonwebtoken'
 
 export default class TokenGenerate {
-    private espiresAt = 5 * 60 * 1000
     constructor(private secretKey: string) { }
     generate(argument: string | object) {
         const token = sign(argument, this.secretKey)
@@ -9,6 +8,14 @@ export default class TokenGenerate {
     }
 
     verify = (token: string) => {
-        return verify(token, this.secretKey)
+        const errors: string[] = []
+        try {
+            const payload = verify(token, this.secretKey) as string
+            return { payload, error: errors }
+        } catch (err: unknown) {
+            const error = err as JsonWebTokenError
+            errors.push(`invalid token: ${error.message}`)
+            return { payload: null, error: errors }
+        }
     }
 }

@@ -1,12 +1,9 @@
-import Todo from "../../domain/entity/Todo";
+import UserTodo from "../../domain/entity/UserTodo";
 import { DeleteByIdRepository } from "../Repository.interface";
 
 export default class RemoveTodo {
-    todoRepository
-    constructor(todoRepository: DeleteByIdRepository<Todo>) {
-        this.todoRepository = todoRepository;
-    }
+    constructor(readonly userTodoRepository: DeleteByIdRepository<UserTodo>) {}
     async execute(id: string){
-        await this.todoRepository.deleteById(id)
+        await this.userTodoRepository.deleteById(id)
     }
 }
