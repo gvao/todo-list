@@ -17,15 +17,19 @@ todoController.on(async (args) => {
         todoGateway.deleteTodo(id)
         return updateTodoList()
     }
-    if (type == 'submit') {
+    if (type === 'submit') {
         await todoGateway.addTodo(input)
         return updateTodoList()
     }
-    if (type == 'checked') {
+    if (type === 'checked') {
         await todoGateway.changeStatus(id, status)
         return updateTodoList()
     }
 
+    if (type === 'logout') {
+        authService.logout()
+    }
 })
+
 
 updateTodoList()

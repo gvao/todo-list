@@ -6,6 +6,7 @@ class TodoController {
 
     constructor() {
         this.form = document.querySelector('#form-search');
+        this.buttonLogout = document.getElementById('button_logout');
         this.inputSearch = this.form.search;
         this.todoList = document.querySelector('#todo-list');
         this.areas = this.todoList.querySelectorAll('.todo-list__status-list')
@@ -38,6 +39,8 @@ class TodoController {
             this.emit({ type: 'submit', input })
             event.target.reset();
         });
+
+        this.buttonLogout.addEventListener('click', event => this.#observer.notifyObservers({ type: 'logout'}))
     }
 
     /**
