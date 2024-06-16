@@ -74,19 +74,21 @@ describe('app', () => {
                 }
             })
 
-            it('should create a new todo to user', async () => {
-                const titles = ['any_title', 'outer_title']
-                for (const title of titles) {
-                    const url = `${URL_BASE}/api/user/todo`
-                    const result = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'authorization': `Bearer ${fakeToken}`, 'Content-Type': "application/json" },
-                        body: JSON.stringify({ title })
-                    })
-                    expect(result.status).toBe(201)
-                    const { message } = await result.json()
-                    expect(message).toBe('Todo created!')
-                }
+            describe('Create UserTodo', () => {
+                it('should create a new todo to user', async () => {
+                    const titles = ['any_title', 'outer_title']
+                    for (const title of titles) {
+                        const url = `${URL_BASE}/api/user/todo`
+                        const result = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'authorization': `Bearer ${fakeToken}`, 'Content-Type': "application/json" },
+                            body: JSON.stringify({ title })
+                        })
+                        expect(result.status).toBe(201)
+                        const { message } = await result.json()
+                        expect(message).toBe('Todo created!')
+                    }
+                })
             })
 
             it('should return todo list by user', async () => {
@@ -98,7 +100,7 @@ describe('app', () => {
                 fakeUserTodoList.push(...todoList)
             })
 
-            it('#/api/todos?search={parameter} return todo list filtered ', async () => {
+            it('should return todo list filtered', async () => {
                 const url = `${URL_BASE}/api/user/todo?search=outer`
                 const response = await fetch(url, options)
                 const { todoList } = await response.json()
@@ -107,14 +109,14 @@ describe('app', () => {
                 expect(todoExpected!.title).toBe('outer_title')
             })
 
-            it('#/api/todos?search={parameter} parameter not found ', async () => {
+            it('should return void list with invalid parameter', async () => {
                 const url = `http://localhost:${PORT}/api/user/todo?search=not_found`
                 const response = await fetch(url, options)
                 const { todoList } = await response.json()
                 expect(todoList).toHaveLength(0)
             })
 
-            it('POST "/api/user/todo/:id/changeStatus" update isDone property by Todo', async () => {
+            it('should updated isDone property by Todo', async () => {
                 const [firstTodo] = fakeUserTodoList
                 const url = `${URL_BASE}/api/user/todo/${firstTodo.id}/changeStatus`
                 const result = await fetch(url, {
@@ -129,10 +131,11 @@ describe('app', () => {
                 const { todoList } = (await response.json())
                 const todo = todoList.find(todo => todo.id === firstTodo.id)
                 expect(todo!.isDone).toBeTruthy()
+                expect(todoList).toHaveLength(2)
 
             })
 
-            it('DELETE "/api/user/todo/:id"', async () => {
+            it('DELETE UserTodo', async () => {
                 const optionsDelete = { ...options, method: "DELETE" }
                 for (const userTodo of fakeUserTodoList) {
                     const url = `${URL_BASE}/api/user/todo/${userTodo.id}`

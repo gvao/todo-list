@@ -11,7 +11,9 @@ export default class UserTodoRepositoryInMemory implements Repository {
         return this.userTodoList.find(todo => todo.id === id)
     }
     async save(userTodo: UserTodo): Promise<void> {
-        this.userTodoList.push(userTodo)
+        const index = this.userTodoList.findIndex(todo => todo.id === userTodo.id)
+        if (index < 0) this.userTodoList.push(userTodo)
+        this.userTodoList.splice(index, 1, userTodo)
     }
     async getUserTodoById(userId: string): Promise<UserTodo[]> {
         return this.userTodoList.filter(todo => todo.userId === userId)
