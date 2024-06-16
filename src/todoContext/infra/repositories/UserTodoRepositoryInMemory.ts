@@ -1,9 +1,12 @@
-import { SaveRepository } from "../../../shared/Repository.interface"
+import { GetByIdRepository, SaveRepository } from "../../../shared/Repository.interface"
 import { GetUserTodoByIdRepository } from "../../application/Repository.interface"
 import UserTodo from "../../domain/entity/UserTodo"
 
 export default class UserTodoRepositoryInMemory implements Repository {
     private userTodoList: UserTodo[] = []
+    async getById(id: string): Promise<UserTodo | undefined> {
+        return this.userTodoList.find(todo => todo.id === id)
+    }
     async save(userTodo: UserTodo): Promise<void> {
         this.userTodoList.push(userTodo)
     }
@@ -12,4 +15,4 @@ export default class UserTodoRepositoryInMemory implements Repository {
     }
 }
 
-interface Repository extends GetUserTodoByIdRepository, SaveRepository<UserTodo> {}
+interface Repository extends GetUserTodoByIdRepository, SaveRepository<UserTodo>, GetByIdRepository<UserTodo> { }
